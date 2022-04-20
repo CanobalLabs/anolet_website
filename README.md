@@ -3,11 +3,14 @@ This is the frontend code for Anolet. It is built using Next.js, React, and mate
 
 ## Running the development server
 If you want to quickly test some changes, this is the best place to start.\
-First, you need to install the dependencies by running `npm i(nstall)` or `yarn`.\
+First, you need to install the dependencies by running `npm i(nstall)` or `yarn`.
 
 Then, running the dev server is as simple as running `npm run dev`/`yarn dev`.\
 Note that the dev server also listens for file changes, so you don't need to worry about restarting after every change.
 
+## Production notes
+If you want to deploy to production, run `npm run build`/`yarn build`. This builds an optimised production build of the frontend, which can be started with `npm run start`/`yarn start`. This is the best way to deploy the frontend.\
+If you don't fancy the builds, you can build to static HTML using `next export`. But please be advised that this does come with [some caveats](https://nextjs.org/docs/advanced-features/static-html-export#unsupported-features). 
 ## Directory structure
 The `components` directory will be where you put the components. Things like the sidebar, the header, the footer, etc. will be put here.\
 The `pages` directory is pretty self-explanatory. Note that there aren't any things you should touch in `app.js`.\
