@@ -14,6 +14,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { House } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
@@ -35,13 +36,25 @@ export default function Home() {
             boxSizing: 'border-box',
           },
         }}
+        
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
+        <Toolbar>
+          <Image src="/anolet.png" alt="Anolet logo" width="64" height="64"></Image>
+          <Typography variant="h4">
+            Anolet
+          </Typography>
+        </Toolbar>
         <Divider />
         <List>
           {/* main pages will be put here, e.g. home, games, etc. */}
+          <ListItem button key="Home">
+            <ListItemIcon>
+              <House />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
         </List>
         <Divider />
         <List>
