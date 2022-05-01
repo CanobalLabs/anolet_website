@@ -13,6 +13,7 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { House } from '@mui/icons-material';
 import Alert from '@mui/material/Alert';
@@ -31,7 +32,7 @@ import { useRouter } from 'next/router'
 
 const drawerWidth = 240;
 
-export default function Scaffold({ children, isLoggedIn, optionalAuth }) {
+export default function Scaffold({ children, isLoggedIn }) {
   const router = useRouter()
   return (
     <>
@@ -59,25 +60,23 @@ export default function Scaffold({ children, isLoggedIn, optionalAuth }) {
         </Toolbar>
         <Divider />
         {/* main pages will be put here, e.g. home, games, etc. */}
-        {isLoggedIn ? <>
-          <List>
-            <ListItem button key="Home" component="a" onClick={(e) => {
-              router.push("/");
-            }}>
-              <ListItemIcon>
-                <House />
-              </ListItemIcon>
-              <ListItemText primary="Home" />
-            </ListItem>
-          </List>
-          <Divider />
-        </> : <></> }
         <List>
-        <ListItem button key="Log in/Sign up">
+          <ListItem button key="Home" component="a" onClick={(e) => {
+            router.push("/");
+          }}>
+            <ListItemIcon>
+              <House />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+        <ListItem button key={ isLoggedIn ? "Settings" : "Log in/Sign up"}>
           <ListItemIcon>
-            <AccountCircleIcon />
+            { isLoggedIn ? <SettingsIcon /> : <AccountCircleIcon /> }
           </ListItemIcon>
-          <ListItemText primary="Log in/Sign up" />
+          <ListItemText primary={ isLoggedIn ? "Settings" : "Log in/Sign up"} />
         </ListItem>
         </List>
       </Drawer>
