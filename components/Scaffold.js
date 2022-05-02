@@ -32,7 +32,7 @@ import { useRouter } from 'next/router'
 
 const drawerWidth = 240;
 
-export default function Scaffold({ children, isLoggedIn }) {
+export default function Scaffold({ children, isLoggedIn, hideBanner, sx }) {
   const router = useRouter()
   return (
     <>
@@ -40,7 +40,7 @@ export default function Scaffold({ children, isLoggedIn }) {
         <Metas />
       </Head>
       <ThemeProvider theme={darkTheme}>
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={sx}>
       <CssBaseline />
       <Drawer
         sx={{
@@ -72,7 +72,9 @@ export default function Scaffold({ children, isLoggedIn }) {
         </List>
         <Divider />
         <List>
-        <ListItem button key={ isLoggedIn ? "Settings" : "Log in/Sign up"}>
+        <ListItem button key={ isLoggedIn ? "Settings" : "Log in/Sign up"} component="a" onClick={(e) => {
+            isLoggedIn ? console.log("implement settings") : router.push("/auth/login")
+          }}>
           <ListItemIcon>
             { isLoggedIn ? <SettingsIcon /> : <AccountCircleIcon /> }
           </ListItemIcon>
@@ -84,7 +86,7 @@ export default function Scaffold({ children, isLoggedIn }) {
         component="main"
         sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
       >
-        { isLoggedIn ? <></> : <Alert severity="warning">Some site features require logging in. You will be able to explore content on this page, but stuff like playing games and creating content will not work. Register an account to join the fun!</Alert> }
+        { isLoggedIn || hideBanner ? <></> : <Alert severity="warning">Some site features require logging in. You will be able to explore content on this page, but stuff like playing games and creating content will not work. Register an account to join the fun!</Alert> }
         <br></br>
         { children }
       </Box>
