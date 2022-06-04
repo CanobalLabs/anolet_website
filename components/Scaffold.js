@@ -70,6 +70,16 @@ export default function Scaffold({ children, isLoggedIn, hideBanner, sx }) {
             <ListItemText primary="Home" />
           </ListItem>
         </List>
+        <List>
+          <ListItem button key="Avatar" component="a" onClick={(e) => {
+            router.push("/");
+          }}>
+            <ListItemIcon>
+              <House />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+        </List>
         <Divider />
         <List>
         <ListItem button key={ isLoggedIn ? "Settings" : "Log in/Sign up"} component="a" onClick={(e) => {
