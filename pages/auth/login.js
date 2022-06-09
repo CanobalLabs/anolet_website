@@ -14,7 +14,36 @@ export default function Login() {
   const [username, setUsername] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [isErrored, setError] = React.useState(false)
+  const [passIsErrored, setPassError] = React.useState(false)
   const [errText, setErrText] = React.useState('')
+  const [passErrText, setPassErrText] = React.useState('')
+
+  function preemptiveValidationUsername(text) {
+    setUsername(text)
+
+    if (text.length < 3) {
+      setError(true)
+      setErrText("Your username cannot be shorter than 3 characters.")
+    } else if (text.length > 20) {
+      setError(true)
+      setErrText("Your username cannot be longer than 20 characters.")
+    } else {
+      setError(false)
+      setErrText('')
+    }
+  }
+
+  function preemptiveValidationPassword(text) {
+    setPassword(text)
+    
+    if (text.length < 8) {
+      setError(true)
+      setErrText("Your password needs to be greater than 8 characters.")
+    } else {
+      setError(false)
+      setErrText('')
+    }
+  }
 
   function validate(response) {
     if (response.token != null) {
@@ -56,9 +85,9 @@ export default function Login() {
       <Scaffold isLoggedIn={false} hideBanner={true} sx={{ display: 'flex' }}>
         <Typography variant="h2"><b>Login</b></Typography>
         <br></br>
-        <TextField fullWidth id="username" label="Username" error={isErrored} helperText={errText} variant="standard" onChange={(e) => {setUsername(e.target.value)}} />
+        <TextField fullWidth id="username" label="Username" error={isErrored} helperText={errText} variant="standard" onChange={(e) => {preemptiveValidationUsername(e.target.value)}} />
         <br></br>
-        <TextField fullWidth id="pass" label="Password" variant="standard" type="password" onChange={(e) => {setPassword(e.target.value)}} />
+        <TextField fullWidth id="pass" label="Password" variant="standard" type="password" onChange={(e) => { preemptiveValidationPassword(e.target.value) }} />
         <br></br>
         <Button variant="contained" sx={{ marginTop: 4 }} onClick={() => { tryLogin() }} >Login</Button>
         <Button variant="outlined" sx={{ marginLeft: 2, marginTop: 4 }} onClick={() => { trySignup() }}>Sign up</Button>
