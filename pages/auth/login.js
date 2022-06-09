@@ -89,8 +89,8 @@ export default function Login() {
         <br></br>
         <TextField fullWidth id="pass" label="Password" error={passIsErrored} helperText={passErrText} variant="standard" type="password" onChange={(e) => { preemptiveValidationPassword(e.target.value) }} />
         <br></br>
-        <Button variant="contained" sx={{ marginTop: 4 }} onClick={() => { tryLogin() }} >Login</Button>
-        <Button variant="outlined" sx={{ marginLeft: 2, marginTop: 4 }} onClick={() => { trySignup() }}>Sign up</Button>
+        <Button variant="contained" sx={{ marginTop: 4 }} disabled={isErrored || passIsErrored} onClick={() => { tryLogin() }} >Login</Button>
+        <Button variant="outlined" sx={{ marginLeft: 2, marginTop: 4 }} disabled={isErrored || passIsErrored} onClick={() => { trySignup() }}>Sign up</Button>
       </Scaffold>
     </>
   )
