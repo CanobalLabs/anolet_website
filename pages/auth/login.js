@@ -36,9 +36,9 @@ export default function Login() {
   function preemptiveValidationPassword(text) {
     setPassword(text)
     
-    if (text.length < 8) {
+    if (text.length < 7) {
       setPassError(true)
-      setPassErrText("Your password needs to be greater than 8 characters.")
+      setPassErrText("Your password needs to be greater than 7 characters.")
     } else {
       setPassError(false)
       setPassErrText('')
