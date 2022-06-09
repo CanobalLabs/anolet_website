@@ -16,7 +16,9 @@ export default function Login() {
   async function tryLogin() {
     try {
       const request = JSON.stringify({ username: username, password: password })
-      const response = await (await fetch('https://api.anolet.com/login/', { method: "POST", body: request })).json()
+      const response = await (await fetch('https://api.anolet.com/login/', { method: "POST", body: request, headers: {
+        'Content-Type': 'application/json'
+      }, })).json()
       console.log(response)
     } catch (e) {
       console.log(e)
@@ -27,7 +29,9 @@ export default function Login() {
   async function trySignup() {
     try {
       const request = JSON.stringify({ username: username, password: password })
-      const response = await (await fetch('https://api.anolet.com/login/signup', { method: "POST", body: request })).json()
+      const response = await (await fetch('https://api.anolet.com/login/signup', { method: "POST", body: request, headers: {
+        'Content-Type': 'application/json'
+      },  })).json()
       console.log(response)
     } catch (e) {
       console.log(e)
