@@ -24,6 +24,17 @@ export default function Login() {
 
   }
 
+  async function trySignup() {
+    try {
+      const request = JSON.stringify({ username: username, password: password })
+      const response = await (await fetch('https://api.anolet.com/login/signup', { method: "POST", body: request })).json()
+      console.log(response)
+    } catch (e) {
+      console.log(e)
+    }
+
+  }
+
   return (
     <>
       <Head>
@@ -38,7 +49,7 @@ export default function Login() {
         <TextField fullWidth id="pass" label="Password" variant="standard" type="password" onChange={(e) => {setPassword(e.target.value)}} />
         <br></br>
         <Button variant="contained" sx={{ marginTop: 4 }} onClick={() => { tryLogin() }} >Login</Button>
-        <Button variant="outlined" sx={{ marginLeft: 2, marginTop: 4 }}>Sign up</Button>
+        <Button variant="outlined" sx={{ marginLeft: 2, marginTop: 4 }} onClick={() => { trySignup() }}>Sign up</Button>
       </Scaffold>
     </>
   )
