@@ -37,11 +37,11 @@ export default function Login() {
     setPassword(text)
     
     if (text.length < 8) {
-      setError(true)
-      setErrText("Your password needs to be greater than 8 characters.")
+      setPassError(true)
+      setPassErrText("Your password needs to be greater than 8 characters.")
     } else {
-      setError(false)
-      setErrText('')
+      setPassError(false)
+      setPassErrText('')
     }
   }
 
