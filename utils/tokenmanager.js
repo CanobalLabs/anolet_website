@@ -1,1 +1,0 @@
-export default function save(token) { localStorage.setItem('ANALTOK', token); }

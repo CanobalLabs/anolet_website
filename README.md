@@ -1,19 +1,63 @@
-# Anolet
-This is the frontend code for Anolet. It is built using Next.js, React, and material-ui.
+<h1 align="center">
+	<a>
+		<img align="center"
+			width="200"
+			alt="Logo"
+			src="https://phexora.com/assets/Logo-TransBGFullScale.png">
+	</a>
+</h1>
 
-## Running the development server
-If you want to quickly test some changes, this is the best place to start.\
-First, you need to install the dependencies by running `npm i(nstall)` or `yarn`.
+This is the website frontend client that communicates with the backend server. It is static, and you only need to compile and serve the `./dist` directory.
 
-Then, running the dev server is as simple as running `npm run dev`/`yarn dev`.\
-Note that the dev server also listens for file changes, so you don't need to worry about restarting after every change.
+## Making Changes
+When making changes, be sure to have your branch set to the `staging` branch and test that your code works correctly.
+If your code runs without issue you may push it to the `staging` branch and the frontend for the staging domain (https://staging.phexora.com) will immediately start compiling your changes and running them (you won't need to run build each time).
 
-## Production notes
-If you want to deploy to production, run `npm run build`/`yarn build`. This builds an optimised production build of the frontend, which can be started with `npm run start`/`yarn start`. This is the best way to deploy the frontend.\
-If you don't fancy the builds, you can build to static HTML using `next export`. But please be advised that this does come with [some caveats](https://nextjs.org/docs/advanced-features/static-html-export#unsupported-features). 
-## Directory structure
-The `components` directory will be where you put the components. Things like the sidebar, the header, the footer, etc. will be put here.\
-The `pages` directory is pretty self-explanatory. Note that there aren't any things you should touch in `app.js`.\
-In the `public` directory, other files can be put here. These are files that can be accessed normally by the end user. For example, if I were to put a file named `test.png` in the folder, the way to access it would be to go to `{address}/test.png`, or reference `/test.png` in code.\
+## Running Development Environment
 
-The `styles` directory probably doesn't need to be touched much, but it's just regular CSS styles.
+To run in a developer environment, run ```npm run dev``` in the project folder to fire up a development environment with Vite.
+<br><br>
+The environment will automatically recompile and restart when changes are made to the frontend code.
+<br><br>
+To stop the development environment, press ```CTRL+C```.
+
+## Running in Production
+If you want to simulate running in production, you can run ```npm run build``` and your code will be compiled and will be accessible on the `./dist` folder.
+Note: The staging branch automatically runs on the staging API. You will need to change the baseUrl to the production API for a full simulation, but if you are developing the frontend to communicate with API endpoints that are still in staging, your code won't work.
+## Setting Up a MongoDB database
+
+For storing users, circles, and more, Phexora uses MongoDB.
+<br><br>
+Create a MongoDB instance either locally or using a cloud provider such as MongoDB Cloud Atlas.
+<br><br>
+Onc you have created your instance, create a database named "platform". Then, set the `DB_URI` to the following, filling in the spots: `mongodb+srv://USERNAME:PASSWORD@DBURL/platform?retryWrites=true&w=majority`
+
+## Creating a Redis Server
+
+For caching and key/value stores, Redis is used. Create a Redis instance either locally or using a cloud provider such as Redis Enterprise or DigitalOcean Databases.
+<br><br>
+The only key you need to create is a `STRING` key named `"maintenance"`, and set it to either `"true"` (maintenance mode on) or `"false"` (maintenance mode off).
+<br><br>
+After you have created the key, set the `REDIS` env paramater to the following, filling in the spots:
+`redis://USERNAME:PASSWORD@HOST:PORT`
+
+## Setting the JWT token
+
+The JWT token can be anything you would like it to be. Usually, I set `TOKEN` to `TEST` but you could set it to something random if you would like (including symbols, lowercase levels, numbers, etc).
+
+## Discord Setup
+
+To test out development of the Discord Bot, use the development bot in the testing server. (https://discord.gg/)
+<br><br>
+The development bot is free to be used by all platform developers to aide in the development while testing on your local machine.
+<br><br>
+This makes it easier so that every developer does not have to create a discord bot and set up OAuth.
+<br><br>
+To use the development bot and client, set the following ENV Parameters to the following values:
+| Paramater Name | Value |
+| ----------- | ----------- |
+| DISCORD_CLIENT_ID   | TBD |
+| DISCORD_CLIENT_SECRET | TBD |
+| DISCORD_GUILD | TBD |
+| DISCORD_VERIFIED | TBD |
+| BOT_TOKEN | TBD |
