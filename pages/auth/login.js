@@ -59,7 +59,7 @@ export default function Login() {
 
   async function tryLogin() {
     const request = JSON.stringify({ username: username, password: password })
-    const response = await (await fetch('https://api.prod.infrastructure.anolet.com/login/', { method: "POST", body: request, headers: {
+    const response = await (await fetch('https://prod-api-infra.anolet.com/login/', { method: "POST", body: request, headers: {
       'Content-Type': 'application/json'
     }, })).json()
 
@@ -68,7 +68,7 @@ export default function Login() {
 
   async function trySignup() {
     const request = JSON.stringify({ username: username, password: password })
-    const response = await (await fetch('https://api.prod.infrastructure.anolet.com/login/signup', { method: "POST", body: request, headers: {
+    const response = await (await fetch('https://prod-api-infra.anolet.com/login/signup', { method: "POST", body: request, headers: {
       'Content-Type': 'application/json'
     },  })).json()
     
