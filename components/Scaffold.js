@@ -15,7 +15,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { House } from '@mui/icons-material';
+import { Home } from '@mui/icons-material';
 import Alert from '@mui/material/Alert';
 
 
@@ -56,7 +56,7 @@ export default function Scaffold({ children, isLoggedIn, hideBanner, sx }) {
         anchor="left"
       >
         <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Image src="/AnoletLogoSmall.png" alt="Anolet logo" width="64" height="64"></Image>
+          <Image src="/AnoletLogoSmall.png" alt="Anolet logo" width="100" height="100"></Image>
         </Toolbar>
         <Divider />
         {/* main pages will be put here, e.g. home, games, etc. */}
@@ -65,7 +65,7 @@ export default function Scaffold({ children, isLoggedIn, hideBanner, sx }) {
             router.push("/");
           }}>
             <ListItemIcon>
-              <House />
+              <Home />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
@@ -75,7 +75,7 @@ export default function Scaffold({ children, isLoggedIn, hideBanner, sx }) {
             router.push("/");
           }}>
             <ListItemIcon>
-              <House />
+              <Home />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
