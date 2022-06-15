@@ -64,7 +64,7 @@ export default function Login() {
 
   async function tryLogin() {
     const request = JSON.stringify({ username: username, password: password })
-    const response = await (await fetch('https://staging-api-infra.anolet.com/login/', { mode: "same-site", method: "POST", body: request, headers: {
+    const response = await (await fetch('https://staging-api-infra.anolet.com/login/', { mode: "no-cors", method: "POST", body: request, headers: {
       'Content-Type': 'application/json'
     }, })).json()
 
@@ -73,7 +73,7 @@ export default function Login() {
 
   async function trySignup() {
     const request = JSON.stringify({ username: username, password: password })
-    const response = await (await fetch('https://staging-api-infra.anolet.com/login/signup', { mode: "same-site", method: "POST", body: request, headers: {
+    const response = await (await fetch('https://staging-api-infra.anolet.com/login/signup', { mode: "no-cors", method: "POST", body: request, headers: {
       'Content-Type': 'application/json'
     },  })).json()
     
