@@ -28,12 +28,14 @@ const darkTheme = createTheme({
 });
 
 import { useRouter } from 'next/router'
+import { loggedIn } from '../utils/tokenmanager.js'
 
 
 const drawerWidth = 240;
 
-export default function Scaffold({ children, isLoggedIn, hideBanner, sx }) {
+export default function Scaffold({ children, hideBanner, sx }) {
   const router = useRouter()
+  const isLoggedIn = loggedIn()
   return (
     <>
       <Head>

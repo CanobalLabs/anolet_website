@@ -19,7 +19,7 @@ export default function Home() {
         <Metas />
       </Head>
       
-      <Scaffold isLoggedIn={false} sx={{ display: 'flex' }}>
+      <Scaffold sx={{ display: 'flex' }}>
         <Toolbar>
             <Typography variant="h3">
                 User Name

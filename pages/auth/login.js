@@ -9,6 +9,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import { useRouter } from 'next/router'
+
 
 export default function Login() {
   const [username, setUsername] = React.useState('')
@@ -17,6 +19,8 @@ export default function Login() {
   const [passIsErrored, setPassError] = React.useState(false)
   const [errText, setErrText] = React.useState('')
   const [passErrText, setPassErrText] = React.useState('')
+
+  const router = useRouter()
 
   function preemptiveValidationUsername(text) {
     setUsername(text)
@@ -50,7 +54,8 @@ export default function Login() {
       setError(false)
       setErrText('')
       save(response.token)
-      // TODO: redir to homepage after finishing auth
+
+      router.push('/')
     } else if (response.error != false) {
       setError(true)
       setErrText(response.error)
@@ -82,7 +87,7 @@ export default function Login() {
         <Metas />
       </Head>
       
-      <Scaffold isLoggedIn={false} hideBanner={true} sx={{ display: 'flex' }}>
+      <Scaffold hideBanner={true} sx={{ display: 'flex' }}>
         <Typography variant="h2"><b>Login</b></Typography>
         <br></br>
         <TextField fullWidth id="username" label="Username" error={isErrored} helperText={errText} variant="standard" onChange={(e) => {preemptiveValidationUsername(e.target.value)}} />
