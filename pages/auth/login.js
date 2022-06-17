@@ -58,7 +58,7 @@ export default function Login() {
       router.push('/')
     } else if (response.error != false) {
       setError(true)
-      setErrText(response.error)
+      setErrText(response.error.details.body[0].message)
     }
   }
 

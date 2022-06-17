@@ -16,6 +16,7 @@ import ListItemText from '@mui/material/ListItemText';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Home } from '@mui/icons-material';
+import { FaceRetouchingNatural } from '@mui/icons-material';
 import Alert from '@mui/material/Alert';
 
 
@@ -29,6 +30,7 @@ const darkTheme = createTheme({
 
 import { useRouter } from 'next/router'
 import { loggedIn } from '../utils/tokenmanager.js'
+import AnoletNavbarEntry from './AnoletNavbarEntry';
 
 
 const drawerWidth = 240;
@@ -63,27 +65,18 @@ export default function Scaffold({ children, hideBanner, sx }) {
         <Divider />
         {/* main pages will be put here, e.g. home, games, etc. */}
         <List>
-          <ListItem button key="Home" component="a" onClick={(e) => {
+          <AnoletNavbarEntry name="Home" icon={<Home/>} action={(e) => {
             router.push("/");
-          }}>
-            <ListItemIcon>
-              <Home />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItem>
-        </List>
-        <List>
+          }}/>
           <ListItem button key="Avatar" component="a" onClick={(e) => {
             router.push("/");
           }}>
             <ListItemIcon>
-              <Home />
+              <FaceRetouchingNatural />
             </ListItemIcon>
-            <ListItemText primary="Home" />
+            <ListItemText primary="Avatar" />
           </ListItem>
-        </List>
         <Divider />
-        <List>
         <ListItem button key={ isLoggedIn ? "Settings" : "Log in/Sign up"} component="a" onClick={(e) => {
             isLoggedIn ? console.log("implement settings") : router.push("/auth/login")
           }}>
