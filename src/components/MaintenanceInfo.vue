@@ -17,7 +17,7 @@
       <button
         class="discord"
         style="cursor: pointer"
-        onclick="location.href = 'https://discord.gg/n7mxPMnsnX"
+        onclick="location.href = 'https://discord.gg/n7mxPMnsnX'"
       >
         <b>Discord Server</b>
       </button>
