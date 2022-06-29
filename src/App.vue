@@ -9,21 +9,8 @@
 import Sidebar from "./components/Sidebar.vue";
 import Login from "./components/Login.vue";
 import Signup from "./components/Signup.vue";
-import axios from 'axios'
+import axios from "axios";
 var me = null;
-if (localStorage.ANALTOK) {
-axios.get("https://staging-api-infra.anolet.com/user/me", {
-  headers: {
-    "Content-Type": "application/json",
-    "Authorization": localStorage.ANALTOK
-  }
-}).then(res => {
-  if (res.data != "Unauthorized") {
-    console.log(this)
-    me = res.data
-  }
-})
-}
 
 export default {
   name: "App",
@@ -31,15 +18,32 @@ export default {
   components: {
     Sidebar,
     Login,
-    Signup
+    Signup,
   },
 
   data: () => ({
-    me,
+    me: null,
     dialogs: {
       login: false,
-      signup: false
-    }
+      signup: false,
+    },
   }),
+  created: function () {
+      if (localStorage.ANALTOK) {
+        axios
+          .get("https://staging-api-infra.anolet.com/user/me", {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: localStorage.ANALTOK,
+            },
+          })
+          .then((res) => {
+            if (res.data != "Unauthorized") {
+              this.me = res.data;
+            }
+          });
+      }
+    },
 };
+
 </script>
