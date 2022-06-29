@@ -12,7 +12,7 @@ import Signup from "./components/Signup.vue";
 import axios from 'axios'
 var me = null;
 if (localStorage.ANALTOK) {
-await axios.get("https://staging-api-infra.anolet.com/user/me", {
+axios.get("https://staging-api-infra.anolet.com/user/me", {
   headers: {
     "Content-Type": "application/json",
     "Authorization": localStorage.ANALTOK
