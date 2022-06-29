@@ -20,7 +20,7 @@
 
         <v-list-item-content>
           <v-list-item-title class="white--text username"
-            >{{ truncate(this.$root.me.username, 8) }}<a class="crownsbar">{{ this.$root.me.amulets || '3.7K+' }}</a>
+            >{{ truncate(this.$root.me.username, 6) }}<a class="crownsbar">{{ formatValue(this.$root.me.amulets || 69696969) }}</a>
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -44,13 +44,15 @@
 <script>
 import pages from "../pages/index.json";
 import truncate from "../utilities/truncate";
+import formatValue from "../utilities/formatValue";
 
 export default {
   name: "Sidebar",
 
   data: () => ({
     pages,
-    truncate
+    truncate,
+    formatValue
   }),
 };
 </script>
