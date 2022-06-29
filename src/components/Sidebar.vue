@@ -14,13 +14,13 @@
     <v-divider></v-divider>
     <v-list nav>
       <v-list-item to="/" v-if="this.$root.me">
-        <v-list-item-avatar>
+        <v-list-item-avatar width="12">
           <img :src="this.$root.me.avatarURL || '/Avatar3.png'" class="pfp" />
         </v-list-item-avatar>
 
         <v-list-item-content>
           <v-list-item-title class="white--text username"
-            >{{ this.$root.me.username }}<a class="crownsbar">{{ this.$root.me.amulets || '3.7K+' }}</a>
+            >{{ truncate(this.$root.me.username, 8) }}<a class="crownsbar">{{ this.$root.me.amulets || '3.7K+' }}</a>
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -43,12 +43,14 @@
 
 <script>
 import pages from "../pages/index.json";
+import truncate from "../utilities/truncate";
 
 export default {
   name: "Sidebar",
 
   data: () => ({
     pages,
+    truncate
   }),
 };
 </script>
