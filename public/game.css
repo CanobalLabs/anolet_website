@@ -1,0 +1,16 @@
+.pfp {
+  position: fixed;
+  height: auto !important;
+  width: auto !important;
+  transform: scale(0.175);
+  margin-left: calc(-500px * 0.175);
+}
+.username {
+  font-size: 1.01rem !important;
+}
+.crownsbar {
+  position: absolute;
+  right: 0;
+  padding-right: 20px;
+  color: #00ff91 !important;
+}

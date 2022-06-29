@@ -1,19 +1,7 @@
-# Anolet
-This is the frontend code for Anolet. It is built using Next.js, React, and material-ui.
+# Vue 3 + Vite
 
-## Running the development server
-If you want to quickly test some changes, this is the best place to start.\
-First, you need to install the dependencies by running `npm i(nstall)` or `yarn`.
+This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-Then, running the dev server is as simple as running `npm run dev`/`yarn dev`.\
-Note that the dev server also listens for file changes, so you don't need to worry about restarting after every change.
+## Recommended IDE Setup
 
-## Production notes
-If you want to deploy to production, run `npm run build`/`yarn build`. This builds an optimised production build of the frontend, which can be started with `npm run start`/`yarn start`. This is the best way to deploy the frontend.\
-If you don't fancy the builds, you can build to static HTML using `next export`. But please be advised that this does come with [some caveats](https://nextjs.org/docs/advanced-features/static-html-export#unsupported-features). 
-## Directory structure
-The `components` directory will be where you put the components. Things like the sidebar, the header, the footer, etc. will be put here.\
-The `pages` directory is pretty self-explanatory. Note that there aren't any things you should touch in `app.js`.\
-In the `public` directory, other files can be put here. These are files that can be accessed normally by the end user. For example, if I were to put a file named `test.png` in the folder, the way to access it would be to go to `{address}/test.png`, or reference `/test.png` in code.\
-
-The `styles` directory probably doesn't need to be touched much, but it's just regular CSS styles.
+- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)

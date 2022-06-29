@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Games",
+        "path": "/games",
+        "icon": "mdi-gamepad"
+    },
+    {
+        "name": "Store",
+        "path": "/store",
+        "icon": "mdi-store"
+    }
+]
