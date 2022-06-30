@@ -1,7 +1,12 @@
 <template>
   <v-app>
     <Sidebar />
-    <v-main><router-view></router-view><Login></Login><Signup></Signup></v-main>
+    <v-main style="margin: 16px;">
+      <v-alert type="warning" v-if="!this.$root.me.email">Your account does not have an email associated with it. Remember to do this as soon as possible in case anything happens to your account!</v-alert>
+      <router-view></router-view>
+      <Login></Login>
+      <Signup></Signup>
+    </v-main>
   </v-app>
 </template>
 
