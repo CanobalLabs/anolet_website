@@ -37,6 +37,16 @@
         :value="page.name"
         :to="page.path"
       ></v-list-item>
+
+      <v-divider v-if="this.$root.me"></v-divider>
+      <v-list-item
+        v-if="this.$root.me"
+        key="Settings"
+        prepend-icon="mdi-cog"
+        title="Settings"
+        value="Settings"
+        @click="this.$root.dialogs.accountSettings = true"
+      ></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>

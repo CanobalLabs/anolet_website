@@ -2,10 +2,10 @@
   <v-app>
     <Sidebar />
     <v-main style="margin: 16px;">
-      <v-alert type="warning" v-if="!this.$root.me.email">Your account does not have an email associated with it. Remember to do this as soon as possible in case anything happens to your account!</v-alert>
       <router-view></router-view>
       <Login></Login>
       <Signup></Signup>
+      <AccountSettings></AccountSettings>
     </v-main>
   </v-app>
 </template>
@@ -14,23 +14,20 @@
 import Sidebar from "./components/Sidebar.vue";
 import Login from "./components/Login.vue";
 import Signup from "./components/Signup.vue";
+import AccountSettings from "./components/AccountSettings.vue";
+
 import axios from "axios";
 var me = null;
 
 export default {
   name: "App",
 
-  components: {
-    Sidebar,
-    Login,
-    Signup,
-  },
-
   data: () => ({
     me: null,
     dialogs: {
       login: false,
       signup: false,
+      accountSettings: false
     },
   }),
   created: function () {
@@ -49,6 +46,13 @@ export default {
           });
       }
     },
+
+  components: {
+    Sidebar,
+    Login,
+    Signup,
+    AccountSettings,
+  },
 };
 
 </script>
