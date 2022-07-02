@@ -5,7 +5,38 @@
       <v-card-text>
         <v-alert type="warning" v-if="!this.$root.me.email">Your account does not have an email associated with it. Remember to do this as soon as possible in case anything happens to your account!</v-alert>
       
-        <v-text-field v-model="this.$root.me.email" label="Email" type="email" required></v-text-field>
+        <v-text-field v-model="this.$root.me.email" label="Email" type="email">
+            <template v-slot:append>
+                <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="saveEmail()"
+                >
+                Save
+                </v-btn>
+            </template>
+            <template v-slot:prepend>
+                <v-icon v-if="this.$root.me.emailVerified"
+                icon="mdi-check-decagram"
+                color="green"
+                ></v-icon>
+                <v-icon v-else
+                icon="mdi-alert-octagon"
+                color="yellow"
+                ></v-icon>
+            </template>
+        </v-text-field>
+         <v-text-field v-model="this.$root.me.username" label="Username">
+            <template v-slot:append>
+                <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="saveName()"
+                >
+                Save
+                </v-btn>
+            </template>
+        </v-text-field>
       </v-card-text>
 
       <v-card-actions>
@@ -13,17 +44,11 @@
         <v-btn
           color="blue darken-1"
           text
-          @click="save()"
-        >
-          Save
-        </v-btn>
-        <v-btn
-          color="blue darken-1"
-          text
           @click="this.$root.dialogs.accountSettings = false"
         >
           Close
         </v-btn>
+        
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -39,7 +64,7 @@ export default {
     
   },
   methods: {
-    save() {
+    saveEmail() {
         axios.post("https://staging-api-infra.anolet.com/user/user/me/email/", {
             email: this.$root.me.email
         }, 
@@ -54,6 +79,24 @@ export default {
                 window.location.reload();
             }
         })
+    },
+    saveName() {
+        axios.post("https://staging-api-infra.anolet.com/user/me/", {
+            username: this.$root.me.username
+        }, 
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: localStorage.ANALTOK,
+                }
+            }
+            ).then(res => {
+            if (res.status == 200) {
+                window.location.reload();
+            }
+        })
+    },
+    resend() {
     }
   },
   data: () => ({
