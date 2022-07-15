@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     saveEmail() {
-        axios.post("https://staging-api-infra.anolet.com/user/user/me/email/", {
+        axios.post("https://staging-api-infra.anolet.com/user/me/email/", {
             email: this.$root.me.email
         }, 
             {
