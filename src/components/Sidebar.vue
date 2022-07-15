@@ -15,7 +15,7 @@
     <v-list nav>
       <v-list-item to="/" v-if="this.$root.me">
         <v-list-item-avatar width="12">
-          <img :src="this.$root.me.avatarURL || '/Avatar3.png'" class="pfp" />
+          <img :src="this.$root.me.defaultRender ? 'https://cdn.anolet.com/avatars/anolet/internal.png' : `https://cdn.anolet.com/avatars/${this.$root.me.userId}/internal.png`" class="pfp" />
         </v-list-item-avatar>
 
         <v-list-item-content>
