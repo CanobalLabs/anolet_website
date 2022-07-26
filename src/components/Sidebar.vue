@@ -18,11 +18,9 @@
           <img :src="this.$root.me.defaultRender ? 'https://cdn.anolet.com/avatars/anolet/internal.png' : `https://cdn.anolet.com/avatars/${this.$root.me.userId}/internal.png`" class="pfp" />
         </v-list-item-avatar>
 
-        <v-list-item-content>
           <v-list-item-title class="white--text username"
             >{{ truncate(this.$root.me.username, 6) }}<a class="crownsbar">{{ formatValue(this.$root.me.amulets || 69696969) }}</a>
           </v-list-item-title>
-        </v-list-item-content>
       </v-list-item>
       <v-list-item v-else style="justify-content: center;">
         <div class="text-center">
