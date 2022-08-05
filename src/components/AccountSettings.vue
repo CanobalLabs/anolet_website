@@ -40,6 +40,13 @@
       </v-card-text>
 
       <v-card-actions>
+                 <v-btn
+                    color="red darken-1"
+                    variant="flat"
+                    @click="logOut()"
+                >
+                Log Out
+                </v-btn>
         <v-spacer></v-spacer>
         <v-btn
           color="blue darken-1"
@@ -96,7 +103,9 @@ export default {
             }
         })
     },
-    resend() {
+    logOut() {
+        localStorage.removeItem("ANALTOK");
+        window.location.reload();
     }
   },
   data: () => ({

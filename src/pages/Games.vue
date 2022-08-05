@@ -1,11 +1,67 @@
 <template>
-<a>Games page</a>
+  <v-container fluid>
+    <v-row dense>
+      <v-col v-for="game in games" :key="game.title" cols="4">
+        <v-carousel hide-delimiters height="auto" show-arrows="hover" cycle>
+    <v-carousel-item
+      v-for="(item, i) in game.carouselImages"
+      :key="i"
+      :src="item"
+      
+    ></v-carousel-item>
+  </v-carousel>
+        <v-card>
+
+          <v-card-item>
+            <v-card-title v-text="game.title"></v-card-title>
+            <v-card-subtitle>by <b>{{ game.creator.name }}</b></v-card-subtitle>
+            <v-card-description v-text="game.description"></v-card-description>
+          </v-card-item>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn @click="launch(game.id)" :disabled="!this.$root.me" color="green" flat prepend-icon="mdi-play" variant="flat"
+              >Play</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Games",
 
-  data: () => ({}),
+  data: () => ({
+    games: [],
+  }),
+  methods: {
+    launch(id) {
+      document.getElementById("player").src = "https://client.anolet.com/?game=" + id + "&auth=" + localStorage.ANALTOK;
+      document.getElementById("player").style.display = "block";
+      setTimeout(function() {
+        document.getElementById("player").style.opacity = "1";
+      }, 100);
+    },
+  },
+  created: function () {
+    axios
+      .get("https://staging-api-infra.anolet.com/game/s", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.ANALTOK,
+        },
+      })
+      .then((res) => {
+        if (res.data != "Unauthorized") {
+          this.games = res.data;
+        }
+      });
+  },
 };
 </script>

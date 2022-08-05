@@ -8,6 +8,7 @@
       <AccountSettings></AccountSettings>
     </v-main>
   </v-app>
+  <iframe src="" id="player" frameBorder="0"></iframe>
 </template>
 
 <script>
@@ -18,6 +19,17 @@ import AccountSettings from "./components/AccountSettings.vue";
 
 import axios from "axios";
 var me = null;
+
+function handleDisconnect(event) {
+   if (event.data == "disconnect") {
+      document.getElementById("player").style.opacity = "0";
+      setTimeout(function() {
+      document.getElementById("player").style.display = "none";
+      }, 800);
+      document.getElementById("player").src = "";
+   }
+}
+window.addEventListener("message", handleDisconnect, false);
 
 export default {
   name: "App",
