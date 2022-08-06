@@ -27,9 +27,25 @@
 }
 
 html {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
 }
-html::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
+html::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.gamePlayers {
+  position: absolute;
+  right: 0;
+  padding-right: 35px;
+  color: #00ff91 !important;
+}
+
+.playerstext {
+  color: white !important;
+  font-size: 10px;
+  position: absolute;
+  right: 0;
+  padding-right: 16px;
+  margin-top: -10px;
 }
