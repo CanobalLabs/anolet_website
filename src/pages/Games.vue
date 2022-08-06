@@ -44,6 +44,7 @@ export default {
     launch(id) {
       document.getElementById("player").src = "https://client.anolet.com/?game=" + id + "&auth=" + localStorage.ANALTOK;
       document.getElementById("player").style.display = "block";
+      document.body.requestFullscreen();
       setTimeout(function() {
         document.getElementById("player").style.opacity = "1";
       }, 100);

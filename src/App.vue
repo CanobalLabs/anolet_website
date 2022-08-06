@@ -27,6 +27,7 @@ function handleDisconnect(event) {
       document.getElementById("player").style.display = "none";
       }, 800);
       document.getElementById("player").src = "";
+      document.exitFullscreen()
    }
 }
 window.addEventListener("message", handleDisconnect, false);
