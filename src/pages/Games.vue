@@ -24,6 +24,9 @@
             <v-btn @click="launch(game.id)" :disabled="!this.$root.me" color="green" flat prepend-icon="mdi-play" variant="flat"
               >Play</v-btn
             >
+            <v-btn v-if="game.id == 1" @click="launchPreview(game.id)" :disabled="!this.$root.me" color="blue darken-1" flat prepend-icon="mdi-play-box" variant="flat"
+              >Play Preview</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-col>
@@ -42,18 +45,21 @@ export default {
   }),
   methods: {
     launch(id) {
-      if (id == 1) {
-        // Launch preview
-        document.getElementById("player").src = "https://client.anolet.com/?game=" + id + "&auth=" + localStorage.ANALTOK;
-      } else {
-        document.getElementById("player").src = "https://preview.anolet.com/";
-      }
+      document.getElementById("player").src = "https://client.anolet.com/?game=" + id + "&auth=" + localStorage.ANALTOK;
       document.getElementById("player").style.display = "block";
       document.body.requestFullscreen();
       setTimeout(function() {
         document.getElementById("player").style.opacity = "1";
       }, 100);
     },
+    launchPreview() {
+      document.getElementById("player").src = "https://preview.anolet.com/"
+      document.getElementById("player").style.display = "block";
+      document.body.requestFullscreen();
+      setTimeout(function() {
+        document.getElementById("player").style.opacity = "1";
+      }, 100);
+    }
   },
   created: function () {
     axios
