@@ -42,7 +42,12 @@ export default {
   }),
   methods: {
     launch(id) {
-      document.getElementById("player").src = "https://client.anolet.com/?game=" + id + "&auth=" + localStorage.ANALTOK;
+      if (id == 1) {
+        // Launch preview
+        document.getElementById("player").src = "https://client.anolet.com/?game=" + id + "&auth=" + localStorage.ANALTOK;
+      } else {
+        document.getElementById("player").src = "https://preview.anolet.com/";
+      }
       document.getElementById("player").style.display = "block";
       document.body.requestFullscreen();
       setTimeout(function() {
