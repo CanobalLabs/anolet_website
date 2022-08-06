@@ -49,3 +49,13 @@ html::-webkit-scrollbar {
   padding-right: 16px;
   margin-top: -10px;
 }
+
+.previewP {
+  padding-right: 76px;
+}
+
+.preview {
+  padding-right: 50px;
+  margin-top: -6.5px;
+  line-height: 15px;
+}
