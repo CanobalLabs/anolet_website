@@ -2,7 +2,8 @@
   <v-container fluid>
     <v-row dense>
       <v-col v-for="game in games" :key="game.title" cols="4">
-        <v-carousel hide-delimiters height="auto" show-arrows="hover" cycle>
+      <template v-if="game.privacyLevel == 0 || game.creator.id == this.$root.me.id">
+              <v-carousel hide-delimiters height="auto" show-arrows="hover" cycle>
     <v-carousel-item
       v-for="(item, i) in game.carouselImages"
       :key="i"
@@ -29,6 +30,7 @@
             >
           </v-card-actions>
         </v-card>
+      </template>
       </v-col>
     </v-row>
   </v-container>
