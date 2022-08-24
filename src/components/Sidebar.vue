@@ -39,25 +39,25 @@
         <template v-slot:activator="{ props }">
           <v-list-item
             v-bind="props"
-            prepend-icon="mdi-handyman"
+            prepend-icon="mdi-hammer-screwdriver"
             title="My Creations"
           ></v-list-item>
         </template>
           <v-list-item
             title="My Items"
-            prepend-icon="mdi-design-services"
+            prepend-icon="mdi-pencil-ruler"
             value="My Items"
             to="/creations/items"
           ></v-list-item>
           <v-list-item
             title="My Games"
-            prepend-icon="mdi-build"
+            prepend-icon="mdi-wrench"
             value="My Games"
             to="/creations/games"
           ></v-list-item>
           <v-list-item
             title="My Groups"
-            prepend-icon="mdi-groups"
+            prepend-icon="mdi-account-group"
             value="My Groups"
             to="/creations/groups"
           ></v-list-item>
