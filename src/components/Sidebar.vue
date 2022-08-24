@@ -68,6 +68,7 @@
         key="Settings"
         prepend-icon="mdi-cog"
         title="Settings"
+        to="/settings"
         value="Settings"
         @click="this.$root.dialogs.accountSettings = true"
       ></v-list-item>
