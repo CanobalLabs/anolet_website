@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row dense>
     <template v-for="game in games" :key="game.title">
-    <template v-if="game.privacyLevel == 0 || game.creator.id == this.$root.me.id">
+    <template v-if="game.privacyLevel == 0 || game.id == 1 || game.creator.id == this.$root.me.id">
      <v-col cols="4">
               <v-carousel hide-delimiters height="auto" show-arrows="hover" cycle>
     <v-carousel-item
@@ -23,7 +23,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn @click="launch(game.id)" :disabled="!this.$root.me" color="green" flat prepend-icon="mdi-play" variant="flat"
+            <v-btn @click="launch(game.id)" :disabled="(game.privacyLevel == 1 && game.creator.id != this.$root.me.id) || !this.$root.me" color="green" flat prepend-icon="mdi-play" variant="flat"
               >Play</v-btn
             >
             <v-btn v-if="game.id == 1" @click="launchPreview(game.id)" :disabled="!this.$root.me" color="blue darken-1" flat prepend-icon="mdi-play-box" variant="flat"
