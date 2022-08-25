@@ -119,8 +119,8 @@ h2 {
 }
 
 @media screen and (max-width: 767px) {
-  margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 20px;
+    margin-right: 20px;
     line-height: 10px;
 }
 h4 {
