@@ -6,6 +6,7 @@
               <v-carousel hide-delimiters height="auto" show-arrows="hover" cycle>
     <v-carousel-item
       src="'https://cdn.anolet.com/' + item.assetURL"
+      key="1"
     ></v-carousel-item>
   </v-carousel>
         <v-card>
