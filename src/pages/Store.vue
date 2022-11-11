@@ -4,7 +4,7 @@
     <template v-for="item in items" :key="item.id">
      <v-col cols="3">
            
-        <v-card theme="white">
+        <v-card theme="light">
 <v-img
       :src="'https://cdn.anolet.com/' + item.assetURL"
       height="200px"
