@@ -25,7 +25,7 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn v-if="this.$root.me && !this.$root.me.belongings.hats.concat(this.$root.me.belongings.bodies, this.$root.me.belongings.faces, this.$root.me.belongings.shoes).includes(item.id))" @click="purchase(item.id)" :disabled="item.available == false" color="blue" flat prepend-icon="mdi-cash" variant="flat">
+            <v-btn v-if="this.$root.me && !this.$root.me.belongings.hats.concat(this.$root.me.belongings.bodies, this.$root.me.belongings.faces, this.$root.me.belongings.shoes).includes(item.id)" @click="purchase(item.id)" :disabled="item.available == false" color="blue" flat prepend-icon="mdi-cash" variant="flat">
             Purchase (tbd)
             </v-btn>
             <v-btn v-if="this.$root.me && this.$root.me.belongings.hats.concat(this.$root.me.belongings.bodies, this.$root.me.belongings.faces, this.$root.me.belongings.shoes).includes(item.id)" variant="outlined" disabled>
