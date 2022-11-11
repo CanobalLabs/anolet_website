@@ -17,6 +17,9 @@
                  <v-card-subtitle>designed by <b>{{ item.manager }}</b></v-card-subtitle>
                  <v-card-subtitle>sold by <b>{{ item.owner }}</b></v-card-subtitle>
             </template>
+            <template v-if="item.owner == item.manager">
+                 <v-card-subtitle>designed & sold by <b>{{ item.owner }}</b></v-card-subtitle>
+            </template>
             <v-card-description v-text="item.description"></v-card-description>
           </v-card-item>
 
