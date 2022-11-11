@@ -4,10 +4,11 @@
     <template v-for="item in items" :key="item.id">
      <v-col cols="4">
            
-        <v-card>
+        <v-card theme="white">
 <v-img
       :src="'https://cdn.anolet.com/' + item.assetURL"
-      height="100px"
+      height="200px"
+      width="200px"
       cover
     ></v-img>
           <v-card-item>
@@ -24,10 +25,10 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn v-if="(!this.$root.me) || (this.$root.me && !this.$root.me.belongings[item.type][item.id])" @click="purchase(item.id)" :disabled="(item.available == false) || !this.$root.me" color="blue" flat prepend-icon="mdi-cash" variant="flat">
+            <v-btn v-if="(!this.$root.me) || (this.$root.me && !this.$root.me.belongings.hats.concat(this.$root.me.belongings.bodies, this.$root.me.belongings.faces, this.$root.me.belongings.shoes)[item.id])" @click="purchase(item.id)" :disabled="(item.available == false) || !this.$root.me" color="blue" flat prepend-icon="mdi-cash" variant="flat">
             Purchase (tbd)
             </v-btn>
-            <v-btn v-if="this.$root.me && this.$root.me.belongings[item.type][item.id]" variant="outlined" disabled>
+            <v-btn v-if="this.$root.me && this.$root.me.belongings.hats.concat(this.$root.me.belongings.bodies, this.$root.me.belongings.faces, this.$root.me.belongings.shoes)[item.id]" variant="outlined" disabled>
             Owned
             </v-btn>
           </v-card-actions>
