@@ -6,7 +6,7 @@
            
         <v-card>
 <v-img
-      src="'https://cdn.anolet.com/' + item.assetURL"
+      :src="'https://cdn.anolet.com/' + item.assetURL"
       height="100px"
       cover
     ></v-img>
