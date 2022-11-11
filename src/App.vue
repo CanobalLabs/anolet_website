@@ -55,6 +55,7 @@ export default {
           .then((res) => {
             if (res.data != "Unauthorized") {
               this.me = res.data;
+              alert(JSON.stringify(res.data));
             }
           });
       }
