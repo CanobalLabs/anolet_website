@@ -3,14 +3,13 @@
     <v-row dense>
     <template v-for="item in items" :key="item.id">
      <v-col cols="4">
-              <v-carousel hide-delimiters height="auto" show-arrows="hover" cycle>
-    <v-carousel-item
-      src="'https://cdn.anolet.com/' + item.assetURL"
-      key="1"
-    ></v-carousel-item>
-  </v-carousel>
+           
         <v-card>
-
+<v-img
+      src="'https://cdn.anolet.com/' + item.assetURL"
+      height="100px"
+      cover
+    ></v-img>
           <v-card-item>
             <v-card-title>{{ item.title }}</v-card-title>
             <template v-if="item.owner != item.manager">
