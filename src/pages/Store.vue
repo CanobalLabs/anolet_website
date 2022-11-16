@@ -46,10 +46,10 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn v-if="this.$root.me && !this.$root.me.belongings.hats.concat(this.$root.me.belongings.bodies, this.$root.me.belongings.faces, this.$root.me.belongings.shoes).includes(item.id)" @click="purchase(item.id)" :disabled="item.available == false" color="blue" flat prepend-icon="mdi-cash" variant="flat">
+            <v-btn v-if="this.$root.me && !this.$root.me.belongings.includes(item.id)" @click="purchase(item.id)" :disabled="item.available == false" color="blue" flat prepend-icon="mdi-cash" variant="flat">
             Purchase
             </v-btn>
-            <v-btn v-if="this.$root.me && this.$root.me.belongings.hats.concat(this.$root.me.belongings.bodies, this.$root.me.belongings.faces, this.$root.me.belongings.shoes).includes(item.id)" variant="outlined" color="red">
+            <v-btn v-if="this.$root.me && this.$root.me.belongings.includes(item.id)" variant="outlined" color="red">
             Owned
             </v-btn>
           </v-card-actions>
@@ -108,8 +108,8 @@ export default {
         },
       })
       .then((res) => {
-        if (res.data != "Unauthorized") {
-        //  this.items = res.data;
+        if (res.status == 200) {
+        this.$root.me.belongings.push(id)
         }
       });
     },
