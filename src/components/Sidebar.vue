@@ -2,7 +2,7 @@
   <v-navigation-drawer permanent>
     <v-divider></v-divider>
     <v-list nav>
-<v-img src="https://anolet.com/Logo2.png" height="100" class="mx-1 siteLogo"></v-img>
+<v-img src="https://anolet.com/Logo2.png" height="100" class="ma-1 siteLogo"></v-img>
       <v-list-item v-if="!this.$root.me" style="justify-content: center;">
         <div class="text-center">
           <v-btn color="green" @click="this.$root.dialogs.login = true">Login</v-btn> <v-btn color="blue" @click="this.$root.dialogs.signup = true">Signup</v-btn>
