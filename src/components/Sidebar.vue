@@ -1,27 +1,18 @@
 <template>
   <v-navigation-drawer permanent>
-    <img
-      style="
-        width: 40%;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        margin-left: 50%;
-        transform: translate(-50%);
-        border-radius: 20px;
-      "
-      src="https://media.discordapp.net/attachments/975559137712807976/975560249140457573/AnoletLogoSmallWhite.png?width=663&height=663"
-    />
     <v-divider></v-divider>
     <v-list nav>
-      <v-list-item to="/" v-if="this.$root.me">
-        <v-list-item-avatar width="12">
-          <img :src="this.$root.me.defaultRender ? 'https://cdn.anolet.com/avatars/anolet/internal.png' : `https://cdn.anolet.com/avatars/${this.$root.me.id}/internal.png`" class="pfp" />
-        </v-list-item-avatar>
-
-          <v-list-item-title class="white--text username"
-            >{{ truncate(this.$root.me.username, 6) }}<a class="crownsbar">{{ formatValue(this.$root.me.amulets || 69696969) }}</a>
-          </v-list-item-title>
-      </v-list-item>
+        <v-card theme="light" class="fill-height ma-3" v-if="this.$root.me">
+<v-img
+:src="this.$root.me.defaultRender ? 'https://cdn.anolet.com/avatars/anolet/preview.png' : `https://cdn.anolet.com/avatars/${this.$root.me.id}/preview.png`"
+      class="avatarImage"
+      height="200"
+      
+    ></v-img>
+          <v-card-item>
+            <v-card-title>{{ this.$root.me.username }}<div class="chiparea"><v-chip color="green">${{ this.$root.me.amulets }}</v-chip></div></v-card-title>
+          </v-card-item>
+        </v-card>
       <v-list-item v-else style="justify-content: center;">
         <div class="text-center">
           <v-btn color="green" @click="this.$root.dialogs.login = true">Login</v-btn> <v-btn color="blue" @click="this.$root.dialogs.signup = true">Signup</v-btn>
@@ -34,7 +25,17 @@
         :title="page.name"
         :value="page.name"
         :to="page.path"
-      ></v-list-item>
+      >
+      <template v-slot:append v-if="page.name == 'Games' && this.$root.permissions?.includes('INFRASTRUCTURE_GAMES')">
+          <v-btn
+            color="grey-lighten-1"
+            icon="mdi-tune-vertical"
+            variant="text"
+            size="small"
+            @click="this.$root.dialogs.manageGames = true"
+          ></v-btn>
+        </template>
+    </v-list-item>
             <v-list-group value="My Creations">
         <template v-slot:activator="{ props }">
           <v-list-item

@@ -9,6 +9,13 @@ const routes = [
     {
         path: '/store',
         name: "Store",
+        children: [
+            { path: 'hats' },
+            { path: 'bodies' },
+            { path: 'faces' },
+            { path: 'shoes' },
+          ],
+        alias: "/store/all",
         component: () => import('../pages/Store.vue')
     },
     {
