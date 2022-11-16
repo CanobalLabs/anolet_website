@@ -3,18 +3,6 @@
     <v-divider></v-divider>
     <v-list nav>
 <v-img src="https://anolet.com/Logo2.png" height="100" class="mx-1 siteLogo"></v-img>
-        <v-card color="grey-darken-3" class="fill-height ma-1" v-if="this.$root.me">
-<v-img
-:src="this.$root.me.defaultRender ? 'https://cdn.anolet.com/avatars/anolet/preview.png' : `https://cdn.anolet.com/avatars/${this.$root.me.id}/preview.png`"
-      class="avatarImage"
-      height="200"
-      
-    ></v-img>
-    <v-divider></v-divider>
-          <v-card-item>
-            <v-card-title>{{ this.$root.me.username }}<div class="chiparea"><v-chip color="green" variant="elevated">${{ this.$root.me.amulets }}</v-chip></div></v-card-title>
-          </v-card-item>
-        </v-card>
       <v-list-item v-else style="justify-content: center;">
         <div class="text-center">
           <v-btn color="green" @click="this.$root.dialogs.login = true">Login</v-btn> <v-btn color="blue" @click="this.$root.dialogs.signup = true">Signup</v-btn>
@@ -76,6 +64,20 @@
         @click="this.$root.dialogs.accountSettings = true"
       ></v-list-item>
     </v-list>
+        <template v-slot:append>
+          <v-card color="grey-darken-3" class="fill-height ma-1" v-if="this.$root.me">
+<v-img
+:src="this.$root.me.defaultRender ? 'https://cdn.anolet.com/avatars/anolet/preview.png' : `https://cdn.anolet.com/avatars/${this.$root.me.id}/preview.png`"
+      class="avatarImage"
+      height="200"
+      
+    ></v-img>
+    <v-divider></v-divider>
+          <v-card-item>
+            <v-card-title>{{ this.$root.me.username }}<div class="chiparea"><v-chip color="green" variant="elevated">${{ this.$root.me.amulets }}</v-chip></div></v-card-title>
+          </v-card-item>
+        </v-card>
+        </template>
   </v-navigation-drawer>
 </template>
 
