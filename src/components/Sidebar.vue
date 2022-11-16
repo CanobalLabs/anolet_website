@@ -65,7 +65,7 @@
       ></v-list-item>
     </v-list>
         <template v-slot:append v-if="this.$root.me">
-          <v-card color="grey-darken-3" class="fill-height ma-1">
+          <v-card color="grey-darken-3" class="fill-height mx-1 my-3">
 <v-img
 :src="this.$root.me.defaultRender ? 'https://cdn.anolet.com/avatars/anolet/preview.png' : `https://cdn.anolet.com/avatars/${this.$root.me.id}/preview.png`"
       class="avatarImage"
