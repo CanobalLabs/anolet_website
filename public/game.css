@@ -13,17 +13,15 @@
   padding-right: 20px;
   color: #00ff91 !important;
 }
-
 .itemImage > img {
   padding: 50px;
 }
 .siteLogo > img {
   padding: 10px;
 }
-
 .siteLogo {
-  border-radius: 5px;
   background: white;
+  border-radius: 5px;
 }
 
 .avatarImage > img {
