@@ -2,7 +2,7 @@
   <v-navigation-drawer permanent>
     <v-divider></v-divider>
     <v-list nav>
-        <v-card theme="light" class="fill-height ma-3" v-if="this.$root.me">
+        <v-card class="fill-height ma-3" v-if="this.$root.me">
 <v-img
 :src="this.$root.me.defaultRender ? 'https://cdn.anolet.com/avatars/anolet/preview.png' : `https://cdn.anolet.com/avatars/${this.$root.me.id}/preview.png`"
       class="avatarImage"
