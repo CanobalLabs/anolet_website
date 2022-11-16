@@ -17,6 +17,14 @@
 .itemImage > img {
   padding: 50px;
 }
+.siteLogo > img {
+  padding: 10px;
+}
+
+.siteLogo {
+  border-radius: 10px;
+  background: white;
+}
 
 .avatarImage > img {
   padding: 25px;
