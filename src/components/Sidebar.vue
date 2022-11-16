@@ -3,7 +3,7 @@
     <v-divider></v-divider>
     <v-list nav>
 <v-img src="https://anolet.com/Logo2.png" height="100" class="mx-1 siteLogo"></v-img>
-      <v-list-item v-else style="justify-content: center;">
+      <v-list-item v-if="!this.$root.me" style="justify-content: center;">
         <div class="text-center">
           <v-btn color="green" @click="this.$root.dialogs.login = true">Login</v-btn> <v-btn color="blue" @click="this.$root.dialogs.signup = true">Signup</v-btn>
         </div>
@@ -64,8 +64,8 @@
         @click="this.$root.dialogs.accountSettings = true"
       ></v-list-item>
     </v-list>
-        <template v-slot:append>
-          <v-card color="grey-darken-3" class="fill-height ma-1" v-if="this.$root.me">
+        <template v-slot:append v-if="this.$root.me">
+          <v-card color="grey-darken-3" class="fill-height ma-1">
 <v-img
 :src="this.$root.me.defaultRender ? 'https://cdn.anolet.com/avatars/anolet/preview.png' : `https://cdn.anolet.com/avatars/${this.$root.me.id}/preview.png`"
       class="avatarImage"
