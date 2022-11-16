@@ -53,23 +53,21 @@
             to="/creations/groups"
           ></v-list-item>
       </v-list-group>
-      <v-divider v-if="this.$root.me"></v-divider>
-      <v-list-item
-        v-if="this.$root.me"
-        key="Settings"
-        prepend-icon="mdi-cog"
-        title="Settings"
-        to="/settings"
-        value="Settings"
-        @click="this.$root.dialogs.accountSettings = true"
-      ></v-list-item>
     </v-list>
         <template v-slot:append v-if="this.$root.me">
         <div class="ma-1">
           <v-card color="grey-darken-3" class="fill-height">
           
           <v-card-item>
-            <v-card-title>{{ this.$root.me.username }}<div class="chiparea"><v-chip color="green" variant="elevated">${{ this.$root.me.amulets }}</v-chip></div></v-card-title>
+            <v-card-title>{{ this.$root.me.username }}<div class="chiparea"><v-chip color="green" variant="elevated">${{ this.$root.me.amulets }}</v-chip></div>
+            <v-btn
+            color="grey-lighten-1"
+            icon="mdi-cog"
+            variant="text"
+            size="small"
+            @click="this.$root.dialogs.accountSettings = true"
+          ></v-btn>
+            </v-card-title>
           </v-card-item>
           
     <v-divider></v-divider>
