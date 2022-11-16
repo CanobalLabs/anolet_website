@@ -46,12 +46,24 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn v-if="this.$root.me && !this.$root.me.belongings.includes(item.id)" @click="purchase(item.id)" :disabled="item.available == false" color="blue" flat prepend-icon="mdi-cash" variant="flat">
-            Purchase
-            </v-btn>
-            <v-btn v-if="this.$root.me && this.$root.me.belongings.includes(item.id)" variant="outlined" color="red">
-            Owned
-            </v-btn>
+            <template v-if="this.$root.me && !this.$root.me.belongings.includes(item.id)">
+                <v-btn stye="opacity: 1" disabled color="blue" flat prepend-icon="mdi-cash" variant="flat">
+                    Purchase
+                </v-btn>
+                
+                <v-btn style="position: absolute; bottom: 0; right: 0;" @click="purchase(item.id)" :disabled="item.available == false" color="blue" flat prepend-icon="mdi-cash" variant="flat">
+                    Purchase
+                </v-btn>
+            </template>
+            <template v-if="this.$root.me && this.$root.me.belongings.includes(item.id)">
+                <v-btn stye="opacity: 1" variant="outlined" color="red">
+                    Owned
+                </v-btn>
+                
+                <v-btn style="position: absolute; bottom: 0; right: 0;" variant="outlined" color="red">
+                    Owned
+                </v-btn>
+            </template>
           </v-card-actions>
         </v-card>
       </v-col>
