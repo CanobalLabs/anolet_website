@@ -11,7 +11,7 @@
       
     ></v-img>
           <v-card-item>
-            <v-card-title>{{ this.$root.me.username }}<div class="chiparea"><v-chip color="green-darken-3">${{ this.$root.me.amulets }}</v-chip></div></v-card-title>
+            <v-card-title>{{ this.$root.me.username }}<div class="chiparea"><v-chip color="green" variant="elevated">${{ this.$root.me.amulets }}</v-chip></div></v-card-title>
           </v-card-item>
         </v-card>
       <v-list-item v-else style="justify-content: center;">
