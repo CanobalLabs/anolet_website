@@ -3,7 +3,7 @@
     <v-divider></v-divider>
     <v-list nav>
 <v-img src="https://anolet.com/Logo2.png" height="50" class="mx-1 siteLogo"></v-img>
-        <v-card color="grey-darken-3" class="fill-height ma-1" v-if="this.$root.me">
+        <v-card color="grey-darken-4" class="fill-height ma-1" v-if="this.$root.me">
 <v-img
 :src="this.$root.me.defaultRender ? 'https://cdn.anolet.com/avatars/anolet/preview.png' : `https://cdn.anolet.com/avatars/${this.$root.me.id}/preview.png`"
       class="avatarImage"
@@ -11,7 +11,7 @@
       
     ></v-img>
           <v-card-item>
-            <v-card-title>{{ this.$root.me.username }}<div class="chiparea"><v-chip color="green-darken-1">${{ this.$root.me.amulets }}</v-chip></div></v-card-title>
+            <v-card-title>{{ this.$root.me.username }}<div class="chiparea"><v-chip color="green-darken-3">${{ this.$root.me.amulets }}</v-chip></div></v-card-title>
           </v-card-item>
         </v-card>
       <v-list-item v-else style="justify-content: center;">
