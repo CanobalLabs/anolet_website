@@ -67,16 +67,18 @@
         <template v-slot:append v-if="this.$root.me">
         <div class="ma-1">
           <v-card color="grey-darken-3" class="fill-height">
+          
+          <v-card-item>
+            <v-card-title>{{ this.$root.me.username }}<div class="chiparea"><v-chip color="green" variant="elevated">${{ this.$root.me.amulets }}</v-chip></div></v-card-title>
+          </v-card-item>
+          
+    <v-divider></v-divider>
 <v-img
 :src="this.$root.me.defaultRender ? 'https://cdn.anolet.com/avatars/anolet/preview.png' : `https://cdn.anolet.com/avatars/${this.$root.me.id}/preview.png`"
       class="avatarImage"
       height="200"
       
     ></v-img>
-    <v-divider></v-divider>
-          <v-card-item>
-            <v-card-title>{{ this.$root.me.username }}<div class="chiparea"><v-chip color="green" variant="elevated">${{ this.$root.me.amulets }}</v-chip></div></v-card-title>
-          </v-card-item>
         </v-card>
         </div>
         </template>
