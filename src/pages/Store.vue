@@ -47,20 +47,20 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <template v-if="this.$root.me && !this.$root.me.belongings.includes(item.id)">
-                <v-btn stye="opacity: 1" disabled color="blue" flat prepend-icon="mdi-cash" variant="flat">
+                <v-btn class="fakebtn" disabled color="blue" flat prepend-icon="mdi-cash" variant="flat">
                     Purchase
                 </v-btn>
                 
-                <v-btn style="position: absolute; bottom: 0; right: 0;" @click="purchase(item.id)" :disabled="item.available == false" color="blue" flat prepend-icon="mdi-cash" variant="flat">
+                <v-btn class="realbtn" @click="purchase(item.id)" :disabled="item.available == false" color="blue" flat prepend-icon="mdi-cash" variant="flat">
                     Purchase
                 </v-btn>
             </template>
             <template v-if="this.$root.me && this.$root.me.belongings.includes(item.id)">
-                <v-btn stye="opacity: 1" variant="outlined" color="red">
+                <v-btn class="fakebtn" variant="outlined" color="red">
                     Owned
                 </v-btn>
                 
-                <v-btn style="position: absolute; bottom: 0; right: 0;" variant="outlined" color="red">
+                <v-btn class="realbtn" variant="outlined" color="red">
                     Owned
                 </v-btn>
             </template>
@@ -121,7 +121,8 @@ export default {
       })
       .then((res) => {
         if (res.status == 200) {
-        this.$root.me.belongings.push(id)
+        this.$root.me.belongings.push(id);
+        // this.$root.me.amulets = 0
         }
       });
     },

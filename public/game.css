@@ -24,6 +24,16 @@
   border-radius: 5px;
 }
 
+.realbtn {
+  position: absolute !important;
+  bottom: 8px;
+  right: 8px;
+}
+
+.fakebtn {
+  opacity: 0 !important;
+}
+
 .avatarImage > img {
   padding: 25px;
 }

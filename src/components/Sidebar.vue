@@ -55,7 +55,7 @@
       </v-list-group>
     </v-list>
         <template v-slot:append v-if="this.$root.me">
-        <div class="ma-1">
+        <div class="mx-1 my-2">
           <v-card color="grey-darken-3" class="fill-height">
           
           <v-card-item>
@@ -65,6 +65,7 @@
             icon="mdi-cog"
             variant="text"
             size="small"
+            class="mx-1"
             @click="this.$root.dialogs.accountSettings = true"
           ></v-btn>
             </v-card-title>
