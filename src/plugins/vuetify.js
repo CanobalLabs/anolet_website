@@ -9,7 +9,15 @@ import * as directives from 'vuetify/directives'
 
 export default createVuetify({
   theme: {
-    defaultTheme: "dark"
+    defaultTheme: "dark",
+    themes: {
+      anoletTheme: {
+        dark: true,
+        colors: {
+          primary: "#1B2CC1"
+        }
+      }
+    }
   },
   components,
   directives,
