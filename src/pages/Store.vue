@@ -86,9 +86,9 @@ export default {
         filter: ""
       },
       {
-        title: "Hats",
-        to: "/store/hats",
-        filter: "hat"
+        title: "Accessories",
+        to: "/store/accessories",
+        filter: "accessory"
       },
       {
         title: "Bodies",
@@ -148,8 +148,8 @@ export default {
   created: function () {
     var filterType = "";
     switch (window.location.pathname) {
-      case "/store/hats":
-        filterType = "hat"
+      case "/store/accessories":
+        filterType = "accessory"
         break;
       case "/store/bodies":
         filterType = "body"
