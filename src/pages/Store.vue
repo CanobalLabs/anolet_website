@@ -1,4 +1,5 @@
 <template>
+    <v-text-field label="Search" style="margin-bottom: 2px;"></v-text-field>
     <v-row dense>
       <v-col cols="3">
         <v-card
@@ -22,7 +23,6 @@
     </v-list>
   </v-card>
       </v-col>
-    <v-text-field label="Search" style="margin-bottom: 2px;"></v-text-field>
     <template v-for="(item, index) in items" :key="item.id">
      <v-col cols="3">
         <v-card theme="light" class="fill-height">
