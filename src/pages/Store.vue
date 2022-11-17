@@ -24,15 +24,14 @@
     </v-list>
   </v-card>
       </v-col>
-    <template v-for="(item, index) in items" :key="item.id">
+    <template v-for="item in items" :key="item.id">
      <v-col cols="3">
         <v-card theme="light" class="fill-height">
           <div class="chiparea"><v-chip class="spacechip">{{ typeFormat(item.type) }}</v-chip><v-chip color="green">{{ item.price == 0 ? "Free" : "$" + item.price }}</v-chip></div>
-<v-img
-      :src="'https://cdn.anolet.com/' + item.previewURL"
+<v-img  
+      :src="'https://cdn.anolet.com/items/' + item.id + '/preview.png'"
       class="itemImage"
       height="200"
-      
     ></v-img>
           <v-card-item>
             <v-card-title>{{ item.name }}</v-card-title>
