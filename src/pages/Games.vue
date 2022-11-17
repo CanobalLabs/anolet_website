@@ -1,4 +1,5 @@
 <template>
+  <div class="text-h6 font-weight-bold my-2">Popular Games</div>
   <v-container fluid>
     <v-row dense>
     <template v-for="game in games" :key="game.title">
