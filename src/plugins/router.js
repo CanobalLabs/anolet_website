@@ -14,6 +14,7 @@ const routes = [
             { path: 'bodies' },
             { path: 'faces' },
             { path: 'shoes' },
+            { path: 'my-creations' }
           ],
         alias: "/store/all",
         component: () => import('../pages/Store.vue')

@@ -1,75 +1,130 @@
 <template>
-    <v-row dense>
-      <v-col cols="3">
-
-    <v-text-field label="Search" clearable variant="outlined"></v-text-field>
-        <v-card
-    class="mx-auto"
-    max-width="300"
-  >
-    <v-list selected="1">
-      <v-list-item
-        v-for="(item, i) in tabs"
-        :key="i"
-        :value="item.value"
-        active-color="primary"
-        :to="item.to"
-        @click="relistItems(item.filter)"
-      >
-        <template v-slot:prepend v-if="item.icon">
-          <v-icon :icon="item.icon"></v-icon>
-        </template>
-        <v-list-item-title v-text="item.title"></v-list-item-title>
-      </v-list-item>
-    </v-list>
-  </v-card>
-      </v-col>
+  <v-row dense>
+    <v-col cols="3">
+      <v-text-field
+        label="Search"
+        clearable
+        variant="outlined"
+        class="searchBar mx-auto"
+        v-model="search"
+        @input="(search.length >= 3 || search.length == 0) && relistItems()"
+      ></v-text-field>
+      <v-card class="mx-auto">
+        <v-list selected="1">
+          <v-list-item
+            v-for="(item, i) in tabs"
+            :key="i"
+            :value="item.value"
+            active-color="primary"
+            :to="item.to"
+            :disabled="item.disabled"
+            @click="
+              filter = item.filter;
+              relistItems();
+            "
+          >
+            <template v-slot:prepend v-if="item.icon">
+              <v-icon :icon="item.icon"></v-icon>
+            </template>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+            <v-list-item-subtitle v-text="item.description"></v-list-item-subtitle>
+          </v-list-item>
+        </v-list>
+      </v-card>
+    </v-col>
     <template v-for="item in items" :key="item.id">
-     <v-col cols="3">
+      <v-col cols="3">
         <v-card theme="light" class="fill-height">
-          <div class="chiparea"><v-chip class="spacechip">{{ typeFormat(item.type) }}</v-chip><v-chip color="green">{{ item.price == 0 ? "Free" : "$" + item.price }}</v-chip></div>
-<v-img  
-      :src="'https://cdn.anolet.com/items/' + item.id + '/preview.png'"
-      class="itemImage"
-      height="200"
-    ></v-img>
-          <v-card-item>
-            <v-card-title>{{ item.name }}</v-card-title>
+          <div class="chiparea">
+            <v-chip class="spacechip">{{ typeFormat(item.type) }}</v-chip
+            ><v-chip color="green">{{
+              item.price == 0 ? "Free" : "$" + item.price
+            }}</v-chip>
+          </div>
+          <v-img
+            :src="'https://cdn.anolet.com/items/' + item.id + '/preview.png'"
+            class="itemImage"
+            height="200"
+          ></v-img>
+          <v-list-item class="w-100">
+            <template v-slot:prepend>
+              <v-avatar
+                :image="
+                  'https://staging-api-infra.anolet.com/user/' +
+                  item.manager +
+                  '/avatar'
+                "
+                rounded="0"
+              ></v-avatar>
+            </template>
+
+            <v-list-item-title>{{ item.name }}</v-list-item-title>
+
             <template v-if="item.owner != item.manager">
-                 <v-card-subtitle>designed by <b>{{ item.manager }}</b></v-card-subtitle>
-                 <v-card-subtitle>sold by <b>{{ item.owner }}</b></v-card-subtitle>
+              <v-list-item-subtitle
+                >designed by <b>{{ item.manager }}</b></v-list-item-subtitle
+              >
+              <v-list-item-subtitle
+                >sold by <b>{{ item.owner }}</b></v-list-item-subtitle
+              >
             </template>
             <template v-if="item.owner == item.manager">
-                 <v-card-subtitle>designed & sold by <b>{{ item.owner }}</b></v-card-subtitle>
+              <v-list-item-subtitle
+                >designed & sold by
+                <b>{{ item.owner }}</b></v-list-item-subtitle
+              >
             </template>
+          </v-list-item>
+          <v-card-item>
             <v-card-description v-text="item.description"></v-card-description>
           </v-card-item>
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <template v-if="this.$root.me && !this.$root.me.belongings.includes(item.id)">
-                <v-btn class="fakebtn" disabled color="blue" flat prepend-icon="mdi-cash" variant="flat">
-                    Purchase
-                </v-btn>
-                
-                <v-btn class="realbtn" @click="purchase(item.id)" :disabled="item.available == false" color="blue" flat prepend-icon="mdi-cash" variant="flat">
-                    Purchase
-                </v-btn>
+            <template
+              v-if="
+                this.$root.me && !this.$root.me.belongings.includes(item.id)
+              "
+            >
+              <v-btn
+                class="fakebtn"
+                disabled
+                color="blue"
+                flat
+                prepend-icon="mdi-cash"
+                variant="flat"
+              >
+                Purchase
+              </v-btn>
+
+              <v-btn
+                class="realbtn"
+                @click="purchase(item.id)"
+                :disabled="item.available == false"
+                color="blue"
+                flat
+                prepend-icon="mdi-cash"
+                variant="flat"
+              >
+                Purchase
+              </v-btn>
             </template>
-            <template v-if="this.$root.me && this.$root.me.belongings.includes(item.id)">
-                <v-btn class="fakebtn" variant="outlined" color="red">
-                    Owned
-                </v-btn>
-                
-                <v-btn class="realbtn" variant="outlined" color="red">
-                    Owned
-                </v-btn>
+            <template
+              v-if="this.$root.me && this.$root.me.belongings.includes(item.id)"
+            >
+              <v-btn class="fakebtn" variant="outlined" color="red">
+                Owned
+              </v-btn>
+
+              <v-btn class="realbtn" variant="outlined" color="red">
+                Owned
+              </v-btn>
             </template>
           </v-card-actions>
         </v-card>
       </v-col>
     </template>
-    </v-row>
+  </v-row>
 </template>
 
 <script>
@@ -80,88 +135,95 @@ export default {
 
   data: () => ({
     items: [],
+    filter: "",
+    search: "",
     tabs: [
       {
         title: "All",
         to: "/store/",
-        filter: ""
+        filter: "",
       },
       {
         title: "Accessories",
         to: "/store/accessories",
-        filter: "accessory"
+        filter: "accessory",
       },
       {
         title: "Bodies",
         value: 3,
         to: "/store/bodies",
-        filter: "body"
+        filter: "body",
       },
       {
         title: "Faces",
         value: 4,
         to: "/store/faces",
-        filter: "face"
+        filter: "face",
       },
       {
         title: "Shoes",
         value: 5,
         to: "/store/shoes",
-        filter: "shoes"
-      }
-    ]
+        filter: "shoes",
+      },
+    ],
   }),
   methods: {
     purchase(id) {
       axios
-      .post("https://staging-api-infra.anolet.com/item/" + id + "/purchase", undefined, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.ANALTOK
-        },
-      })
-      .then((res) => {
-        if (res.status == 200) {
-        this.$root.me.belongings.push(id);
-        this.$root.startToast("Purchased item", "green", 4000)
-        // this.$root.me.amulets = 0
-        }
-      });
+        .post(
+          "https://staging-api-infra.anolet.com/item/" + id + "/purchase",
+          undefined,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: localStorage.ANALTOK,
+            },
+          }
+        )
+        .then((res) => {
+          if (res.status == 200) {
+            this.$root.me.belongings.push(id);
+            this.$root.startToast("Purchased item", "green", 4000);
+            // this.$root.me.amulets = 0
+          }
+        });
     },
     typeFormat(type) {
       return type.replace(/^./, type[0].toUpperCase());
     },
-    relistItems(filter) {
+    relistItems() {
       axios
-      .get("https://staging-api-infra.anolet.com/item/s", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.ANALTOK,
-          "x-anolet-filter": filter
-        },
-      })
-      .then((res) => {
-        if (res.data != "Unauthorized") {
-          this.items = res.data;
-          twemoji.parse(document.body)
-        }
-      });
-    }
+        .get("https://staging-api-infra.anolet.com/item/s", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.ANALTOK,
+            "x-anolet-filter": this.filter,
+            "x-anolet-search": this.search,
+          },
+        })
+        .then((res) => {
+          if (res.data != "Unauthorized") {
+            this.items = res.data;
+            twemoji.parse(document.body);
+          }
+        });
+    },
   },
   created: function () {
     var filterType = "";
     switch (window.location.pathname) {
       case "/store/accessories":
-        filterType = "accessory"
+        filterType = "accessory";
         break;
       case "/store/bodies":
-        filterType = "body"
+        filterType = "body";
         break;
       case "/store/faces":
-        filterType = "face"
+        filterType = "face";
         break;
       case "/store/shoes":
-        filterType = "shoes"
+        filterType = "shoes";
         break;
     }
     axios
@@ -169,13 +231,31 @@ export default {
         headers: {
           "Content-Type": "application/json",
           Authorization: localStorage.ANALTOK,
-          "x-anolet-filter": filterType
+          "x-anolet-filter": filterType,
         },
       })
       .then((res) => {
         if (res.data != "Unauthorized") {
           this.items = res.data;
-          twemoji.parse(document.body)
+          twemoji.parse(document.body);
+
+          if (this.$root.me?.ranks.includes("UGC") || this.$root.me?.ranks.includes("STAFF")) {
+            this.tabs.push({
+              title: "My Creations",
+              value: 6,
+              to: "/store/my-creations",
+              filter: "my-creations",
+            });
+          } else {
+            this.tabs.push({
+              title: "Join UGC Program",
+              value: 6,
+              disabled: true,
+              description: "UGC Applications are paused right now",
+              to: "/store/join-ugc",
+              filter: null,
+            });
+          }
         }
       });
   },

@@ -19,6 +19,15 @@
 .siteLogo > img {
   padding: 10px;
 }
+
+.searchBar > .v-input__details {
+  display: none;
+}
+
+.searchBar {
+  margin-bottom: 5px;
+}
+
 .siteLogo {
   background: white;
   border-radius: 5px;
