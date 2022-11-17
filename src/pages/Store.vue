@@ -22,9 +22,9 @@
     </v-list>
   </v-card>
       </v-col>
+    <v-text-field label="Search" style="margin-bottom: 2px;"></v-text-field>
     <template v-for="(item, index) in items" :key="item.id">
      <v-col cols="3">
-        <v-text-field v-if="index == 0" label="Search" style="margin-bottom: 5px;"></v-text-field>
         <v-card theme="light" class="fill-height">
           <div class="chiparea"><v-chip class="spacechip">{{ typeFormat(item.type) }}</v-chip><v-chip color="green">{{ item.price == 0 ? "Free" : "$" + item.price }}</v-chip></div>
 <v-img
