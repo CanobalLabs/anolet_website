@@ -3,8 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
     {
         path: '/',
-        name: "Home",
-        component: () => import('../pages/Home.vue')
+        name: "Games",
+        component: () => import('../pages/Games.vue')
     },
     {
         path: '/store',
@@ -17,11 +17,6 @@ const routes = [
           ],
         alias: "/store/all",
         component: () => import('../pages/Store.vue')
-    },
-    {
-        path: '/games',
-        name: "Games",
-        component: () => import('../pages/Games.vue')
     }
 ]
 
