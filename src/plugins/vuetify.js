@@ -9,7 +9,7 @@ import * as directives from 'vuetify/directives'
 
 export default createVuetify({
   theme: {
-    defaultTheme: "dark",
+    defaultTheme: "anoletTheme",
     themes: {
       anoletTheme: {
         dark: true,
