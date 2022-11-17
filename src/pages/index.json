@@ -1,7 +1,7 @@
 [
     {
         "name": "Games",
-        "path": "/games",
+        "path": "/",
         "icon": "mdi-gamepad"
     },
     {
