@@ -1,11 +1,12 @@
 <template>
     <v-row dense>
       <v-col cols="3">
+
+    <v-text-field label="Search"></v-text-field>
         <v-card
     class="mx-auto"
     max-width="300"
   >
-    <v-text-field label="Search" style="margin-bottom: 2px;"></v-text-field>
     <v-list selected="1">
       <v-list-item
         v-for="(item, i) in tabs"
