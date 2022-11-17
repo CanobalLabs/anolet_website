@@ -14,7 +14,7 @@ export default createVuetify({
       anoletTheme: {
         dark: true,
         colors: {
-          primary: "#1B2CC1"
+          primary: "#7692FF"
         }
       }
     }
