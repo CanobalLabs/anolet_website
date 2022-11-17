@@ -2,7 +2,7 @@
     <v-row dense>
       <v-col cols="3">
 
-    <v-text-field label="Search"></v-text-field>
+    <v-text-field label="Search" clearable variant="outlined"></v-text-field>
         <v-card
     class="mx-auto"
     max-width="300"
