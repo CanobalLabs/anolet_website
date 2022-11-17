@@ -24,6 +24,13 @@
   border-radius: 5px;
 }
 
+img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+}
+
 .realbtn {
   position: absolute !important;
   bottom: 8px;
@@ -39,7 +46,9 @@
 }
 
 .chiparea {
-  float: right;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .spacechip {

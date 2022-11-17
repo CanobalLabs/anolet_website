@@ -7,6 +7,10 @@
       <Signup></Signup>
       <AccountSettings></AccountSettings>
       <ManageGames></ManageGames>
+
+      <v-snackbar v-model="toast.active" :color="toast.color" :timeout="toast.timeout" location="top-right">
+        {{ toast.text }}
+      </v-snackbar>
     </v-main>
   </v-app>
   <iframe src="" id="player" frameBorder="0"></iframe>
@@ -21,6 +25,8 @@ import ManageGames from "./components/ManageGames.vue";
 
 import axios from "axios";
 var me = null;
+
+twemoji.parse(document.body)
 
 function handleDisconnect(event) {
   if (event.data == "disconnect") {
@@ -46,7 +52,21 @@ export default {
       accountSettings: false,
       manageGames: false
     },
+    toast: {
+      active: false,
+      text: "",
+      color: "",
+      timeout: 0
+    }
   }),
+  methods: {
+    startToast(text, color, timeout) {
+      this.toast.text = text;
+      this.toast.color = color
+      this.toast.timeout = timeout
+      this.toast.active = true;
+    }
+  },
   created: function () {
     if (localStorage.ANALTOK) {
       axios

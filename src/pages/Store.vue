@@ -26,6 +26,7 @@
      <v-col cols="3">
            
         <v-card theme="light" class="fill-height">
+          <div class="chiparea"><v-chip class="spacechip">{{ typeFormat(item.type) }}</v-chip><v-chip color="green">{{ item.price == 0 ? "Free" : "$" + item.price }}</v-chip></div>
 <v-img
       :src="'https://cdn.anolet.com/' + item.previewURL"
       class="itemImage"
@@ -33,7 +34,7 @@
       
     ></v-img>
           <v-card-item>
-            <v-card-title>{{ item.name }}<div class="chiparea"><v-chip class="spacechip">{{ typeFormat(item.type) }}</v-chip><v-chip color="green">{{ item.price == 0 ? "Free" : "$" + item.price }}</v-chip></div></v-card-title>
+            <v-card-title>{{ item.name }}</v-card-title>
             <template v-if="item.owner != item.manager">
                  <v-card-subtitle>designed by <b>{{ item.manager }}</b></v-card-subtitle>
                  <v-card-subtitle>sold by <b>{{ item.owner }}</b></v-card-subtitle>
@@ -122,6 +123,7 @@ export default {
       .then((res) => {
         if (res.status == 200) {
         this.$root.me.belongings.push(id);
+        this.$root.startToast("Purchased item", "green", 4000)
         // this.$root.me.amulets = 0
         }
       });
@@ -141,6 +143,7 @@ export default {
       .then((res) => {
         if (res.data != "Unauthorized") {
           this.items = res.data;
+          twemoji.parse(document.body)
         }
       });
     }
@@ -172,6 +175,7 @@ export default {
       .then((res) => {
         if (res.data != "Unauthorized") {
           this.items = res.data;
+          twemoji.parse(document.body)
         }
       });
   },
