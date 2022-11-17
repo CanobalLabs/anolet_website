@@ -54,6 +54,14 @@
             to="/creations/groups"
           ></v-list-item>
       </v-list-group>
+      
+       <v-list-item
+        prepend-icon="mdi-account-multiple"
+        title="Friends"
+        value="friends"
+        to="/friends"
+      >
+    </v-list-item>
     </v-list>
         <template v-slot:append v-if="this.$root.me">
         <div class="mx-1 my-2">
