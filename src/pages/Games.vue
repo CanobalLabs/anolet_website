@@ -1,6 +1,6 @@
 <template>
-  <div class="text-h6 font-weight-bold my-2">Popular Games</div>
   <v-container fluid>
+  <div class="text-h6 font-weight-bold my-2">Popular Games</div>
     <v-row dense>
     <template v-for="game in games" :key="game.title">
     <template v-if="game.privacyLevel == 0 || game.id == 1 || game.creator.id == this.$root.me.id">
