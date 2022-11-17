@@ -26,12 +26,6 @@
           ></v-btn>
         </template>
     </v-list-item>
-          <v-list-item
-            title="My Items"
-            prepend-icon="mdi-pencil-ruler"
-            value="My Items"
-            to="/creations/items"
-            v-if="this.$root.me?.ranks.includes('UGC')"></v-list-item>
       
 
           <v-list-item
