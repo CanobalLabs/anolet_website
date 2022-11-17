@@ -8,5 +8,10 @@
         "name": "Store",
         "path": "/store",
         "icon": "mdi-store"
+    },
+    {
+        "name": "My Avatar",
+        "path": "/avatar",
+        "icon": "mdi-palette"
     }
 ]
