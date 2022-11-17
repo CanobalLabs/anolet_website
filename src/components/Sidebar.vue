@@ -26,15 +26,7 @@
           ></v-btn>
         </template>
     </v-list-item>
-      
-
-          <v-list-item
-            title="Groups"
-            prepend-icon="mdi-account-group"
-            value="Groups"
-            to="/groups"
-          ></v-list-item>
-          
+                
        <v-list-item
         prepend-icon="mdi-account-multiple"
         title="Friends"
@@ -42,6 +34,13 @@
         to="/friends"
       >
     </v-list-item>
+
+          <v-list-item
+            title="Groups"
+            prepend-icon="mdi-account-group"
+            value="Groups"
+            to="/groups"
+          ></v-list-item>
     </v-list>
         <template v-slot:append v-if="this.$root.me">
         <div class="mx-1 my-2">
