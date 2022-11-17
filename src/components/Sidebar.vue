@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer permanent>
     <v-divider></v-divider>
-    <v-list nav>
+    <v-list nav active-color="primary">
 <v-img src="https://anolet.com/Logo2.png" height="100" class="mx-1 my-2 siteLogo"></v-img>
       <v-list-item v-if="!this.$root.me" style="justify-content: center;">
         <div class="text-center">
