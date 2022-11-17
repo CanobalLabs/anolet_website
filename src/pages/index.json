@@ -13,5 +13,15 @@
         "name": "My Avatar",
         "path": "/avatar",
         "icon": "mdi-palette"
+    },
+    {
+        "name": "Friends",
+        "path": "/friends",
+        "icon": "mdi-account-multiple"
+    },
+    {
+        "name": "Groups",
+        "path": "/groups",
+        "icon": "mdi-account-group"
     }
 ]
