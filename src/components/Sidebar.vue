@@ -26,39 +26,25 @@
           ></v-btn>
         </template>
     </v-list-item>
-            <v-list-group value="My Creations">
-        <template v-slot:activator="{ props }">
-          <v-list-item
-            v-bind="props"
-            prepend-icon="mdi-hammer-screwdriver"
-            title="My Creations"
-          ></v-list-item>
-        </template>
           <v-list-item
             title="My Items"
             prepend-icon="mdi-pencil-ruler"
             value="My Items"
             to="/creations/items"
-            v-if="this.$root.me?.ranks.includes('UGC')"
-          ></v-list-item>
-          <v-list-item
-            title="My Games"
-            prepend-icon="mdi-wrench"
-            value="My Games"
-            to="/creations/games"
-          ></v-list-item>
-          <v-list-item
-            title="My Groups"
-            prepend-icon="mdi-account-group"
-            value="My Groups"
-            to="/creations/groups"
-          ></v-list-item>
-      </v-list-group>
+            v-if="this.$root.me?.ranks.includes('UGC')"></v-list-item>
       
+
+          <v-list-item
+            title="Groups"
+            prepend-icon="mdi-account-group"
+            value="Groups"
+            to="/groups"
+          ></v-list-item>
+          
        <v-list-item
         prepend-icon="mdi-account-multiple"
         title="Friends"
-        value="friends"
+        value="Friends"
         to="/friends"
       >
     </v-list-item>
