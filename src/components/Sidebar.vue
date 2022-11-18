@@ -8,13 +8,13 @@
           <v-btn color="green" @click="this.$root.dialogs.login = true">Login</v-btn> <v-btn color="blue" @click="this.$root.dialogs.signup = true">Signup</v-btn>
         </div>
       </v-list-item>
-      <v-list-item
-        v-for="page in pages"
-        :key="page.path"
+      <template v-for="page in pages :key="page.path">
+            <v-list-item
         :prepend-icon="page.icon"
         :title="page.name"
         :value="page.name"
         :to="page.path"
+        v-if="!(page?.accountRequired && !this.$root.me)"
       >
       <template v-slot:append v-if="page.name == 'Games' && this.$root.permissions?.includes('INFRASTRUCTURE_GAMES')">
           <v-btn
@@ -26,6 +26,7 @@
           ></v-btn>
       </template>
     </v-list-item>
+      </template>
     </v-list>
         <template v-slot:append v-if="this.$root.me">
         <div class="mx-1 my-2">
