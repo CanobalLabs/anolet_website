@@ -12,16 +12,19 @@
     {
         "name": "My Avatar",
         "path": "/avatar",
-        "icon": "mdi-palette"
+        "icon": "mdi-palette",
+        "accountRequired": true
     },
     {
         "name": "Friends",
         "path": "/friends",
-        "icon": "mdi-account-multiple"
+        "icon": "mdi-account-multiple",
+        "accountRequired": true
     },
     {
         "name": "Groups",
         "path": "/groups",
-        "icon": "mdi-account-group"
+        "icon": "mdi-account-group",
+        "accountRequired": true
     }
 ]
