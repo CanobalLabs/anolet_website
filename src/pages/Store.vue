@@ -23,13 +23,15 @@
               relistItems();
             "
           >
-            <template v-slot:prepend v-if="item.icon">
-              <v-icon :icon="item.icon"></v-icon>
-            </template>
             <v-list-item-title v-text="item.title"></v-list-item-title>
-            <v-list-item-subtitle
-              v-text="item.description"
-            ></v-list-item-subtitle>
+          </v-list-item>
+
+          <v-list-item active-color="primary" to="/store/my-creations" @click="filter = 'my-creations'; relistItems();" v-if="this.$root.permissions?.includes('UPLOAD_SELF') || this.$root.permissions?.includes('UPLOAD_ANOLET')">
+            <v-list-item-title>My Creations</v-list-item-title>
+          </v-list-item>
+          <v-list-item active-color="primary" disabled  v-else>
+            <v-list-item-title>Apply for UGC</v-list-item-title>
+            <v-list-item-subtitle>UGC Applications are paused.</v-list-item-subtitle>
           </v-list-item>
         </v-list>
       </v-card>
@@ -132,31 +134,11 @@ export default {
         if (res.data != "Unauthorized") {
           this.items = res.data;
           twemoji.parse(document.body);
-
-          if (
-            this.$root.permissions.includes("UPLOAD_SELF") || this.$root.permissions.includes("UPLOAD_ANOLET")
-          ) {
-            this.tabs.push({
-              title: "My Creations",
-              value: 6,
-              to: "/store/my-creations",
-              filter: "my-creations",
-            });
-          } else {
-            this.tabs.push({
-              title: "Join UGC Program",
-              value: 6,
-              disabled: true,
-              description: "UGC Applications are paused right now",
-              to: "/store/join-ugc",
-              filter: null,
-            });
-          }
         }
       });
   },
   components: {
-    Item
-  }
+    Item,
+  },
 };
 </script>
