@@ -34,6 +34,7 @@
               color="grey-lighten-1"
               icon="mdi-plus"
               variant="text"
+              size="small"
             ></v-btn>
             </template>
           </v-list-item>
