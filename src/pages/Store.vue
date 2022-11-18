@@ -27,101 +27,16 @@
               <v-icon :icon="item.icon"></v-icon>
             </template>
             <v-list-item-title v-text="item.title"></v-list-item-title>
-            <v-list-item-subtitle v-text="item.description"></v-list-item-subtitle>
+            <v-list-item-subtitle
+              v-text="item.description"
+            ></v-list-item-subtitle>
           </v-list-item>
         </v-list>
       </v-card>
     </v-col>
     <template v-for="item in items" :key="item.id">
       <v-col cols="3">
-        <v-card theme="light" class="fill-height">
-          <div class="chiparea">
-            <v-chip class="spacechip">{{ typeFormat(item.type) }}</v-chip
-            ><v-chip color="green">{{
-              item.price == 0 ? "Free" : "$" + item.price
-            }}</v-chip>
-          </div>
-          <v-img
-            :src="'https://cdn.anolet.com/items/' + item.id + '/preview.png'"
-            class="itemImage"
-            height="200"
-          ></v-img>
-          <v-list-item class="w-100">
-            <template v-slot:prepend>
-              <v-avatar
-                :image="
-                  'https://staging-api-infra.anolet.com/user/' +
-                  item.manager +
-                  '/avatar'
-                "
-                rounded="0"
-              ></v-avatar>
-            </template>
-
-            <v-list-item-title>{{ item.name }}</v-list-item-title>
-
-            <template v-if="item.owner != item.manager">
-              <v-list-item-subtitle
-                >designed by <b>{{ item.manager }}</b></v-list-item-subtitle
-              >
-              <v-list-item-subtitle
-                >sold by <b>{{ item.owner }}</b></v-list-item-subtitle
-              >
-            </template>
-            <template v-if="item.owner == item.manager">
-              <v-list-item-subtitle
-                >designed & sold by
-                <b>{{ item.owner }}</b></v-list-item-subtitle
-              >
-            </template>
-          </v-list-item>
-          <v-card-item>
-            <v-card-description v-text="item.description"></v-card-description>
-          </v-card-item>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <template
-              v-if="
-                this.$root.me && !this.$root.me.belongings.includes(item.id)
-              "
-            >
-              <v-btn
-                class="fakebtn"
-                disabled
-                color="blue"
-                flat
-                prepend-icon="mdi-cash"
-                variant="flat"
-              >
-                Purchase
-              </v-btn>
-
-              <v-btn
-                class="realbtn"
-                @click="purchase(item.id)"
-                :disabled="item.available == false"
-                color="blue"
-                flat
-                prepend-icon="mdi-cash"
-                variant="flat"
-              >
-                Purchase
-              </v-btn>
-            </template>
-            <template
-              v-if="this.$root.me && this.$root.me.belongings.includes(item.id)"
-            >
-              <v-btn class="fakebtn" variant="outlined" color="red">
-                Owned
-              </v-btn>
-
-              <v-btn class="realbtn" variant="outlined" color="red">
-                Owned
-              </v-btn>
-            </template>
-          </v-card-actions>
-        </v-card>
+        <Item :item="item"></Item>
       </v-col>
     </template>
   </v-row>
@@ -129,6 +44,7 @@
 
 <script>
 import axios from "axios";
+import Item from "../components/Item.vue";
 
 export default {
   name: "Store",
@@ -150,48 +66,22 @@ export default {
       },
       {
         title: "Bodies",
-        value: 3,
         to: "/store/bodies",
         filter: "body",
       },
       {
         title: "Faces",
-        value: 4,
         to: "/store/faces",
         filter: "face",
       },
       {
         title: "Shoes",
-        value: 5,
         to: "/store/shoes",
         filter: "shoes",
       },
     ],
   }),
   methods: {
-    purchase(id) {
-      axios
-        .post(
-          "https://staging-api-infra.anolet.com/item/" + id + "/purchase",
-          undefined,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: localStorage.ANALTOK,
-            },
-          }
-        )
-        .then((res) => {
-          if (res.status == 200) {
-            this.$root.me.belongings.push(id);
-            this.$root.startToast("Purchased item", "green", 4000);
-            // this.$root.me.amulets = 0
-          }
-        });
-    },
-    typeFormat(type) {
-      return type.replace(/^./, type[0].toUpperCase());
-    },
     relistItems() {
       axios
         .get("https://staging-api-infra.anolet.com/item/s", {
@@ -211,7 +101,7 @@ export default {
     },
   },
   created: function () {
-    var filterType = "";
+    let filterType = "";
     switch (window.location.pathname) {
       case "/store/accessories":
         filterType = "accessory";
@@ -225,13 +115,17 @@ export default {
       case "/store/shoes":
         filterType = "shoes";
         break;
+      case "/store/my-creations":
+        filterType = "my-creations";
+        break;
     }
+    this.filter = filterType;
     axios
       .get("https://staging-api-infra.anolet.com/item/s", {
         headers: {
           "Content-Type": "application/json",
           Authorization: localStorage.ANALTOK,
-          "x-anolet-filter": filterType,
+          "x-anolet-filter": this.filter,
         },
       })
       .then((res) => {
@@ -239,7 +133,9 @@ export default {
           this.items = res.data;
           twemoji.parse(document.body);
 
-          if (this.$root.me?.ranks.includes("UGC") || this.$root.me?.ranks.includes("STAFF")) {
+          if (
+            this.$root.permissions.includes("UPLOAD_SELF") || this.$root.permissions.includes("UPLOAD_ANOLET")
+          ) {
             this.tabs.push({
               title: "My Creations",
               value: 6,
@@ -259,5 +155,8 @@ export default {
         }
       });
   },
+  components: {
+    Item
+  }
 };
 </script>

@@ -18,10 +18,10 @@
 
 <script>
 import Sidebar from "./components/Sidebar.vue";
-import Login from "./components/Login.vue";
-import Signup from "./components/Signup.vue";
-import AccountSettings from "./components/AccountSettings.vue";
-import ManageGames from "./components/ManageGames.vue";
+import Login from "./components/dialogs/Login.vue";
+import Signup from "./components/dialogs/Signup.vue";
+import AccountSettings from "./components/dialogs/AccountSettings.vue";
+import ManageGames from "./components/dialogs/ManageGames.vue";
 
 import axios from "axios";
 var me = null;
