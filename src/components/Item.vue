@@ -1,7 +1,7 @@
 <template>
 <v-card theme="light" class="fill-height">
     <div class="chiparea-left">
-      <v-chip v-if="item.manager == this.$root.me.id">{{ item.sales }} Sale<template v-if="sales != 1">s</template></v-chip>
+      <v-chip v-if="item.manager == this.$root.me.id">{{ item.sales }} Sale<template v-if="item.sales != 1">s</template></v-chip>
       <template v-if="new Date(item.saleEnd) >= new Date()">
       <v-chip :class="item.manager == this.$root.me.id ? 'spacechip' : ''" color="red">{{ 100 - ((item.salePrice * 100) / item.price) }}% off</v-chip>
         <v-chip color="blue" class="spacechip">
