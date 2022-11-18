@@ -1,9 +1,9 @@
 <template>
 <v-card theme="light" class="fill-height">
     <div class="chiparea-left">
-      <v-chip v-if="item.manager == this.$root.me.id">{{ item.sales }} Sale<template v-if="item.sales != 1">s</template></v-chip>
+      <v-chip v-if="item.manager == this.$root.me?.id">{{ item.sales }} Sale<template v-if="item.sales != 1">s</template></v-chip>
       <template v-if="new Date(item.saleEnd) >= new Date()">
-      <v-chip :class="item.manager == this.$root.me.id ? 'spacechip' : ''" color="red">{{ 100 - ((item.salePrice * 100) / item.price) }}% off</v-chip>
+      <v-chip :class="item.manager == this.$root.me?.id ? 'spacechip' : ''" color="red">{{ 100 - ((item.salePrice * 100) / item.price) }}% off</v-chip>
         <v-chip color="blue" class="spacechip">
             <v-icon start icon="mdi-clock"></v-icon>
             {{ humanizeDuration(Interval.fromDateTimes(DateTime.now(), DateTime.fromISO(item.saleEnd)).toDuration().valueOf(), { largest: 1, round: true }) }}
@@ -61,7 +61,7 @@
       <v-spacer></v-spacer>
       <template
         v-if="
-          this.$root.me && !this.$root.me.belongings.includes(item.id)
+          !this.$root.me?.belongings.includes(item.id)
         "
       >
         <v-btn
@@ -88,7 +88,7 @@
         </v-btn>
       </template>
       <template
-        v-if="this.$root.me && this.$root.me.belongings.includes(item.id)"
+        v-if="this.$root.me?.belongings.includes(item.id)"
       >
         <v-btn class="fakebtn" variant="outlined" color="red">
           Owned
