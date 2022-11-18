@@ -1,13 +1,18 @@
 <template>
 <v-card theme="light" class="fill-height">
-    <div class="chiparea-left" v-if="item.manager == this.$root.me.id">
-      <v-chip>{{ item.sales }} Sales</v-chip>
+    <div class="chiparea-left">
+      <v-chip v-if="item.manager == this.$root.me.id">{{ item.sales }} Sales</v-chip>
+      <template v-if="new Date(item.saleEnd) >= new Date()">
+      <v-chip :class="item.manager == this.$root.me.id ? 'spacechip' : ''" color="red">{{ 100 - ((item.salePrice * 100) / item.price) }}% off</v-chip>
+        <v-chip color="blue" class="spacechip">
+            <v-icon start icon="mdi-clock"></v-icon>
+            {{ humanizeDuration(Interval.fromDateTimes(DateTime.now(), DateTime.fromISO(item.saleEnd)).toDuration().valueOf(), { largest: 1, round: true }) }}
+        </v-chip>
+      </template>
     </div>
     <div class="chiparea">
-      <v-chip class="spacechip">{{ typeFormat(item.type) }}</v-chip>
-      <v-chip color="green">{{
-        item.price == 0 ? "Free" : "$" + item.price
-      }}</v-chip>
+      <v-chip color="green">
+        {{ (new Date(item.saleEnd) >= new Date()) ? (item.salePrice == 0 ? "Free" : "$" + item.salePrice) : (item.price == 0 ? "Free" : "$" + item.price) }}</v-chip>
     </div>
     <v-img
       :src="'https://cdn.anolet.com/items/' + item.id + '/preview.png'"
@@ -26,7 +31,12 @@
         ></v-avatar>
       </template>
 
-      <v-list-item-title>{{ item.name }}</v-list-item-title>
+      <v-list-item-title class="font-weight-bold">{{ item.name }} <v-chip
+      class="mx-0"
+      size="x-small"
+    >
+    {{ typeFormat(item.type) }}
+    </v-chip></v-list-item-title>
 
       <template v-if="item.owner != item.manager">
         <v-list-item-subtitle
@@ -94,12 +104,19 @@
 
   <script>
 import axios from "axios";
+import { DateTime, Interval } from "luxon";
+import humanizeDuration from "humanize-duration";
 
 export default {
   name: "Store",
   props: {
     item: Object
   },
+  data: () => ({
+    DateTime: DateTime,
+    Interval: Interval,
+    humanizeDuration: humanizeDuration
+  }),
   methods: {
     purchase(id) {
       axios
@@ -117,6 +134,12 @@ export default {
           if (res.status == 200) {
             this.$root.me.belongings.push(id);
             this.$root.startToast("Purchased item", "green", 4000);
+            if (new Date(item.saleEnd) >= new Date()) {
+                // On sale
+                this.$root.me.amulets = this.item.salePrice
+            } else {
+                this.$root.me.amulets = this.item.price
+            }
             // this.$root.me.amulets = 0
           }
         });
