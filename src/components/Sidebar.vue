@@ -8,7 +8,7 @@
           <v-btn color="green" @click="this.$root.dialogs.login = true">Login</v-btn> <v-btn color="blue" @click="this.$root.dialogs.signup = true">Signup</v-btn>
         </div>
       </v-list-item>
-      <template v-for="page in pages :key="page.path">
+      <template v-for="page in pages" :key="page.path">
             <v-list-item
         :prepend-icon="page.icon"
         :title="page.name"
