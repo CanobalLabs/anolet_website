@@ -1,56 +1,50 @@
 <template>
-<v-card theme="light" class="fill-height">
+  <v-card theme="light" class="fill-height">
     <div class="chiparea-left">
-      <v-chip v-if="item.manager == this.$root.me?.id">{{ item.sales }} Sale<template v-if="item.sales != 1">s</template></v-chip>
+      <v-chip v-if="item.manager == this.$root.me?.id">{{ item.sales }} Sale<template
+          v-if="item.sales != 1">s</template></v-chip>
       <template v-if="new Date(item.saleEnd) >= new Date()">
-      <v-chip :class="item.manager == this.$root.me?.id ? 'spacechip' : ''" color="red">{{ 100 - ((item.salePrice * 100) / item.price) }}% off</v-chip>
+        <v-chip :class="item.manager == this.$root.me?.id ? 'spacechip' : ''" color="red">{{ 100 - ((item.salePrice *
+            100) / item.price)
+        }}% off</v-chip>
         <v-chip color="blue" class="spacechip">
-            <v-icon start icon="mdi-clock"></v-icon>
-            {{ humanizeDuration(Interval.fromDateTimes(DateTime.now(), DateTime.fromISO(item.saleEnd)).toDuration().valueOf(), { largest: 1, round: true }) }}
+          <v-icon start icon="mdi-clock"></v-icon>
+          {{ humanizeDuration(Interval.fromDateTimes(DateTime.now(),
+              DateTime.fromISO(item.saleEnd)).toDuration().valueOf(), { largest: 1, round: true })
+          }}
         </v-chip>
       </template>
     </div>
     <div class="chiparea">
       <v-chip color="green">
-        {{ (new Date(item.saleEnd) >= new Date()) ? (item.salePrice == 0 ? "Free" : "$" + item.salePrice) : (item.price == 0 ? "Free" : "$" + item.price) }}</v-chip>
+        <Amulet v-if="(new Date(item.saleEnd) >= new Date()) ? item.salePrice != 0 : item.price != 0"></Amulet>
+        {{ (new Date(item.saleEnd) >= new Date()) ? (item.salePrice == 0 ? "Free" : item.salePrice) : (item.price
+            == 0 ? "Free" : item.price)
+        }}</v-chip>
     </div>
-    <v-img
-      :src="'https://cdn.anolet.com/items/' + item.id + '/preview.png'"
-      class="itemImage"
-      height="200"
-    ></v-img>
+    <v-img :src="'https://cdn.anolet.com/items/' + item.id + '/preview.png'" class="itemImage" height="200"></v-img>
     <v-list-item class="w-100">
       <template v-slot:prepend>
-        <v-avatar
-          :image="
-            'https://staging-api-infra.anolet.com/user/' +
-            item.manager +
-            '/avatar'
-          "
-          rounded="0"
-        ></v-avatar>
+        <v-avatar :image="
+          item.manager != 'anolet' ? 'https://staging-api-infra.anolet.com/user/' +
+          item.manager +
+          '/avatar' : 'https://preview.anolet.com/AnoletLogoLarge.png'
+        " rounded="0"></v-avatar>
       </template>
 
-      <v-list-item-title class="font-weight-bold">{{ item.name }} <v-chip
-      class="mx-0"
-      size="x-small"
-    >
-    {{ typeFormat(item.type) }}
-    </v-chip></v-list-item-title>
+      <v-list-item-title class="font-weight-bold">{{ item.name }} <v-chip class="mx-0" size="x-small">
+          {{ typeFormat(item.type) }}
+        </v-chip>
+      </v-list-item-title>
 
       <template v-if="item.owner != item.manager">
-        <v-list-item-subtitle
-          >designed by <b>{{ item.manager }}</b></v-list-item-subtitle
-        >
-        <v-list-item-subtitle
-          >sold by <b>{{ item.owner }}</b></v-list-item-subtitle
-        >
+        <v-list-item-subtitle>designed by <b>{{ item.manager == 'anolet' ? 'Anolet Staff' : item.manager }}</b></v-list-item-subtitle>
+        <v-list-item-subtitle>sold by <b>{{ item.owner == 'anolet' ? 'Anolet Staff' : item.owner }}</b></v-list-item-subtitle>
       </template>
       <template v-if="item.owner == item.manager">
-        <v-list-item-subtitle
-          >designed & sold by
-          <b>{{ item.owner }}</b></v-list-item-subtitle
-        >
+        <v-list-item-subtitle>designed & sold by
+          <b>{{ item.owner == 'anolet' ? 'Anolet Staff' : item.owner }}</b>
+        </v-list-item-subtitle>
       </template>
     </v-list-item>
     <v-card-item>
@@ -59,37 +53,19 @@
 
     <v-card-actions>
       <v-spacer></v-spacer>
-      <template
-        v-if="
-          !this.$root.me?.belongings.includes(item.id)
-        "
-      >
-        <v-btn
-          class="fakebtn"
-          disabled
-          color="blue"
-          flat
-          prepend-icon="mdi-cash"
-          variant="flat"
-        >
+      <template v-if="
+        !this.$root.me?.belongings.includes(item.id)
+      ">
+        <v-btn class="fakebtn" disabled color="blue" flat prepend-icon="mdi-cash" variant="flat">
           Purchase
         </v-btn>
 
-        <v-btn
-          class="realbtn"
-          @click="purchase(item.id)"
-          :disabled="item.available == false"
-          color="blue"
-          flat
-          prepend-icon="mdi-cash"
-          variant="flat"
-        >
+        <v-btn class="realbtn" @click="purchase(item.id)" :disabled="item.available == false" color="blue" flat
+          prepend-icon="mdi-cash" variant="flat">
           Purchase
         </v-btn>
       </template>
-      <template
-        v-if="this.$root.me?.belongings.includes(item.id)"
-      >
+      <template v-if="this.$root.me?.belongings.includes(item.id)">
         <v-btn class="fakebtn" variant="outlined" color="red">
           Owned
         </v-btn>
@@ -100,17 +76,20 @@
       </template>
     </v-card-actions>
   </v-card>
-  </template>
+</template>
 
-  <script>
+<script>
 import axios from "axios";
 import { DateTime, Interval } from "luxon";
 import humanizeDuration from "humanize-duration";
-
+import Amulet from "./Amulet.vue"
 export default {
   name: "Store",
   props: {
     item: Object
+  },
+  components: {
+    Amulet
   },
   data: () => ({
     DateTime: DateTime,
@@ -135,10 +114,10 @@ export default {
             this.$root.me.belongings.push(id);
             this.$root.startToast("Purchased item", "green", 4000);
             if (new Date(item.saleEnd) >= new Date()) {
-                // On sale
-                this.$root.me.amulets = this.item.salePrice
+              // On sale
+              this.$root.me.amulets = this.item.salePrice
             } else {
-                this.$root.me.amulets = this.item.price
+              this.$root.me.amulets = this.item.price
             }
             // this.$root.me.amulets = 0
           }

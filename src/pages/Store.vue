@@ -1,44 +1,27 @@
 <template>
   <v-row dense>
     <v-col cols="3">
-      <v-text-field
-        label="Search"
-        clearable
-        variant="outlined"
-        class="searchBar mx-auto"
-        v-model="search"
-        @input="(search.length >= 3 || search.length == 0) && relistItems()"
-      ></v-text-field>
+      <v-text-field label="Search" clearable variant="outlined" class="searchBar mx-auto" v-model="search"
+        @input="(search.length >= 3 || search.length == 0) && relistItems()"></v-text-field>
       <v-card class="mx-auto">
         <v-list selected="1">
-          <v-list-item
-            v-for="(item, i) in tabs"
-            :key="i"
-            :value="item.value"
-            active-color="primary"
-            :to="item.to"
-            :disabled="item.disabled"
-            @click="
-              filter = item.filter;
-              relistItems();
-            "
-          >
+          <v-list-item v-for="(item, i) in tabs" :key="i" :value="item.value" active-color="primary" :to="item.to"
+            :disabled="item.disabled" @click="
+  filter = item.filter;
+relistItems();
+            ">
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item>
 
-          <v-list-item active-color="primary" to="/store/my-creations" @click="filter = 'my-creations'; relistItems();" v-if="this.$root.permissions?.includes('UPLOAD_SELF') || this.$root.permissions?.includes('UPLOAD_ANOLET')">
+          <v-list-item active-color="primary" to="/store/my-creations" @click="filter = 'my-creations'; relistItems();"
+            v-if="this.$root.permissions?.includes('UPLOAD_SELF') || this.$root.permissions?.includes('UPLOAD_ANOLET')">
             <v-list-item-title>My Creations</v-list-item-title>
-            
-             <template v-slot:append>
-            <v-btn
-              color="grey-lighten-1"
-              icon="mdi-plus"
-              variant="text"
-              size="small"
-            ></v-btn>
+
+            <template v-slot:append>
+              <v-btn color="grey-lighten-1" icon="mdi-plus" variant="text" size="small"></v-btn>
             </template>
           </v-list-item>
-          <v-list-item active-color="primary" disabled  v-else>
+          <v-list-item active-color="primary" disabled v-else>
             <v-list-item-title>Apply for UGC</v-list-item-title>
             <v-list-item-subtitle>UGC Applications are paused.</v-list-item-subtitle>
           </v-list-item>

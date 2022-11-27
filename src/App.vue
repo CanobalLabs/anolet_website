@@ -1,19 +1,20 @@
 <template>
   <v-app>
-    <Sidebar />
+    <Sidebar></Sidebar>
     <v-main style="margin: 16px">
       <router-view></router-view>
       <Login></Login>
       <Signup></Signup>
       <AccountSettings></AccountSettings>
       <ManageGames></ManageGames>
+      <CreateItem></CreateItem>
 
       <v-snackbar v-model="toast.active" :color="toast.color" :timeout="toast.timeout" location="top-right">
         {{ toast.text }}
       </v-snackbar>
     </v-main>
   </v-app>
-  <iframe src="" id="player" frameBorder="0"></iframe>
+  <div id="playerbg"><iframe src="https://client.anolet.com/loading.html" id="player" frameBorder="0"></iframe></div>
 </template>
 
 <script>
@@ -22,30 +23,11 @@ import Login from "./components/dialogs/Login.vue";
 import Signup from "./components/dialogs/Signup.vue";
 import AccountSettings from "./components/dialogs/AccountSettings.vue";
 import ManageGames from "./components/dialogs/ManageGames.vue";
+import CreateItem from "./components/dialogs/CreateItem.vue";
 
 import axios from "axios";
-var me = null;
 
 twemoji.parse(document.body)
-
-function fmt(labelValue) 
-  {
-  // Nine Zeroes for Billions
-  return Math.abs(Number(labelValue)) >= 1.0e+9
-
-       ? Math.abs(Number(labelValue)) / 1.0e+9 + "B"
-       // Six Zeroes for Millions 
-       : Math.abs(Number(labelValue)) >= 1.0e+6
-
-       ? Math.abs(Number(labelValue)) / 1.0e+6 + "M"
-       // Three Zeroes for Thousands
-       : Math.abs(Number(labelValue)) >= 1.0e+3
-
-       ? Math.abs(Number(labelValue)) / 1.0e+3 + "K"
-
-       : Math.abs(Number(labelValue));
-
-   }
 
 function handleDisconnect(event) {
   if (event.data == "disconnect") {
@@ -53,7 +35,7 @@ function handleDisconnect(event) {
     setTimeout(function () {
       document.getElementById("player").style.display = "none";
     }, 800);
-    document.getElementById("player").src = "";
+    document.getElementById("player").src = "https://client.anolet.com/loading.html";
     document.exitFullscreen();
   }
 }
@@ -69,8 +51,10 @@ export default {
       login: false,
       signup: false,
       accountSettings: false,
-      manageGames: false
+      manageGames: false,
+      createItem: false
     },
+    createItemState: "create",
     toast: {
       active: false,
       text: "",
@@ -101,8 +85,8 @@ export default {
             axios
               .get(
                 "https://staging-api-infra.anolet.com/user/" +
-                  res.data.id +
-                  "/permissions",
+                res.data.id +
+                "/permissions",
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -123,7 +107,8 @@ export default {
     Login,
     Signup,
     AccountSettings,
-    ManageGames
+    ManageGames,
+    CreateItem
   },
 };
 </script>

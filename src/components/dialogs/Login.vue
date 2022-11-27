@@ -8,18 +8,16 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
-          color="blue darken-1"
-          text
-          @click="this.$root.dialogs.login = false"
-        >
+        <v-btn color="blue darken-1" text @click="this.$root.dialogs.login = false">
           Close
         </v-btn>
         <v-btn color="blue darken-1" text @click="submitLogin(username, password)">Login</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
-</template><script>
+</template>
+
+<script>
 import axios from 'axios'
 
 export default {
@@ -30,8 +28,8 @@ export default {
         username, password
       }).then(res => {
         if (res.status == 200) {
-            localStorage.setItem("ANALTOK", res.data.token);
-            window.location.reload();
+          localStorage.setItem("ANALTOK", res.data.token);
+          window.location.reload();
         }
       })
     },
