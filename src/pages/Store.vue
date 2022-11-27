@@ -78,7 +78,7 @@ export default {
   methods: {
     relistItems() {
       axios
-        .get("https://staging-api-infra.anolet.com/item/s", {
+        .get("https://api-staging.anolet.com/item/s", {
           headers: {
             "Content-Type": "application/json",
             Authorization: localStorage.ANALTOK,
@@ -115,7 +115,7 @@ export default {
     }
     this.filter = filterType;
     axios
-      .get("https://staging-api-infra.anolet.com/item/s", {
+      .get("https://api-staging.anolet.com/item/s", {
         headers: {
           "Content-Type": "application/json",
           Authorization: localStorage.ANALTOK,

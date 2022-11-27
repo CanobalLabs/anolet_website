@@ -73,7 +73,7 @@ export default {
   created: function () {
     if (localStorage.ANALTOK) {
       axios
-        .get("https://staging-api-infra.anolet.com/user/me", {
+        .get("https://api-staging.anolet.com/user/me", {
           headers: {
             "Content-Type": "application/json",
             Authorization: localStorage.ANALTOK,
@@ -84,7 +84,7 @@ export default {
             this.me = res.data;
             axios
               .get(
-                "https://staging-api-infra.anolet.com/user/" +
+                "https://api-staging.anolet.com/user/" +
                 res.data.id +
                 "/permissions",
                 {

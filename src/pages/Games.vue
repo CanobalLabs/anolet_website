@@ -66,7 +66,7 @@ export default {
   },
   created: function () {
     axios
-      .get("https://staging-api-infra.anolet.com/game/s", {
+      .get("https://api-staging.anolet.com/game/s", {
         headers: {
           "Content-Type": "application/json",
           Authorization: localStorage.ANALTOK,

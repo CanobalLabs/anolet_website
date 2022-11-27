@@ -24,7 +24,7 @@ export default {
   name: "Signup",
   methods: {
     submitSignup(username, password) {
-      axios.post("https://staging-api-infra.anolet.com/login/signup", {
+      axios.post("https://api-staging.anolet.com/login/signup", {
         username, password
       }).then(res => {
         if (res.status == 200) {

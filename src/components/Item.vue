@@ -26,7 +26,7 @@
     <v-list-item class="w-100">
       <template v-slot:prepend>
         <v-avatar :image="
-          item.manager != 'anolet' ? 'https://staging-api-infra.anolet.com/user/' +
+          item.manager != 'anolet' ? 'https://api-staging.anolet.com/user/' +
           item.manager +
           '/avatar' : 'https://preview.anolet.com/AnoletLogoLarge.png'
         " rounded="0"></v-avatar>
@@ -100,7 +100,7 @@ export default {
     purchase(id) {
       axios
         .post(
-          "https://staging-api-infra.anolet.com/item/" + id + "/purchase",
+          "https://api-staging.anolet.com/item/" + id + "/purchase",
           undefined,
           {
             headers: {
