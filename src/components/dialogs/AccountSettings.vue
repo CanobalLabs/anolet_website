@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="this.$root.dialogs.accountSettings">
+    <v-dialog v-model="this.$root.dialogs.accountSettings" v-if="this.$root.me">
         <v-card width="600px">
             <v-card-title>Settings for {{ this.$root.me.username }}</v-card-title>
             <v-card-text>
@@ -62,7 +62,8 @@ export default {
                 }
             ).then(res => {
                 if (res.status == 200) {
-                    window.location.reload();
+                    this.$root.dialogs.accountSettings = false;
+                    this.$root.refresh();
                 }
             })
         },
@@ -78,13 +79,15 @@ export default {
                 }
             ).then(res => {
                 if (res.status == 200) {
-                    window.location.reload();
+                    this.$root.dialogs.accountSettings = false;
+                    this.$root.refresh();
                 }
             })
         },
         logOut() {
+            this.$root.dialogs.accountSettings = false
             localStorage.removeItem("ANALTOK");
-            window.location.reload();
+            this.$root.me = null;
         }
     },
     data: () => ({

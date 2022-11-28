@@ -22,35 +22,35 @@
     </v-list>
     <template v-slot:append v-if="this.$root.me">
 
-      <v-menu location="bottom">
+      <v-menu location="top">
         <template v-slot:activator="{ props }">
-          <v-btn color="primary" v-bind="props" class="" block>
+          <v-btn color="#1A2DC1" v-bind="props" class="mx-1" width="247">
             Create
           </v-btn>
         </template>
-        <v-list>
-          <v-list-item @click="this.$root.dialogs.createItem = true">
+        <v-list class="adjustpos" color="blue">
+          <v-list-item @click="this.$root.dialogs.createItem = true" max-width="247">
+            <template v-slot:prepend>
+              <v-icon icon="mdi-wrench"></v-icon>
+            </template>
             <v-list-item-title>Game</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="this.$root.dialogs.createGroup = true">
+            <template v-slot:prepend>
+              <v-icon icon="mdi-account-multiple-plus"></v-icon>
+            </template>
+            <v-list-item-title>Group</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="this.$root.dialogs.createGroup = true">
+            <template v-slot:prepend>
+              <v-icon icon="mdi-brush"></v-icon>
+            </template>
+            <v-list-item-title>Item</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
       <div class="mx-1 my-2">
-        <v-card color="grey-darken-3" class="fill-height">
-
-          <v-card-item>
-            <v-card-title>{{ this.$root.me.username }}<div class="chiparea">
-                <v-chip color="green" variant="elevated"><Amulet></Amulet>{{ this.$root.me.amulets }}</v-chip>
-              </div>
-              <v-btn color="grey-lighten-1" icon="mdi-cog" variant="text" size="small" class="mx-1"
-                @click="this.$root.dialogs.accountSettings = true"></v-btn>
-            </v-card-title>
-          </v-card-item>
-
-          <v-divider></v-divider>
-          <v-img
-            :src="this.$root.me.defaultRender ? 'https://cdn.anolet.com/avatars/anolet/preview.png' : `https://cdn.anolet.com/avatars/${this.$root.me.id}/preview.png`"
-            class="avatarImage" height="200"></v-img>
-        </v-card>
+        <MyselfCard></MyselfCard>
       </div>
     </template>
   </v-navigation-drawer>
@@ -60,7 +60,7 @@
 import pages from "../pages/index.json";
 import truncate from "../utilities/truncate";
 import formatValue from "../utilities/formatValue";
-import Amulet from "./Amulet.vue";
+import MyselfCard from "./MyselfCard.vue";
 
 export default {
   name: "Sidebar",
@@ -71,7 +71,7 @@ export default {
     formatValue
   }),
   components: {
-    Amulet
+    MyselfCard
   }
 };
 </script>

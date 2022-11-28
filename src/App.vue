@@ -2,6 +2,7 @@
   <v-app>
     <Sidebar></Sidebar>
     <v-main style="margin: 16px">
+      <Alerts></Alerts>
       <router-view></router-view>
       <Login></Login>
       <Signup></Signup>
@@ -24,6 +25,7 @@ import Signup from "./components/dialogs/Signup.vue";
 import AccountSettings from "./components/dialogs/AccountSettings.vue";
 import ManageGames from "./components/dialogs/ManageGames.vue";
 import CreateItem from "./components/dialogs/CreateItem.vue";
+import Alerts from "./components/Alerts.vue";
 
 import axios from "axios";
 
@@ -68,6 +70,35 @@ export default {
       this.toast.color = color
       this.toast.timeout = timeout
       this.toast.active = true;
+    },
+    refresh() {
+      axios
+        .get("https://api-staging.anolet.com/user/me", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.ANALTOK,
+          },
+        })
+        .then((res) => {
+          if (res.data != "Unauthorized") {
+            this.me = res.data;
+            axios
+              .get(
+                "https://api-staging.anolet.com/user/" +
+                res.data.id +
+                "/permissions",
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: localStorage.ANALTOK,
+                  },
+                }
+              )
+              .then((res) => {
+                this.permissions = res.data;
+              });
+          }
+        });
     }
   },
   created: function () {
@@ -108,7 +139,8 @@ export default {
     Signup,
     AccountSettings,
     ManageGames,
-    CreateItem
+    CreateItem,
+    Alerts
   },
 };
 </script>

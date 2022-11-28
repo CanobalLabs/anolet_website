@@ -18,8 +18,8 @@
     <div class="chiparea">
       <v-chip color="green">
         <Amulet v-if="(new Date(item.saleEnd) >= new Date()) ? item.salePrice != 0 : item.price != 0"></Amulet>
-        {{ (new Date(item.saleEnd) >= new Date()) ? (item.salePrice == 0 ? "Free" : item.salePrice) : (item.price
-            == 0 ? "Free" : item.price)
+        {{ (new Date(item.saleEnd) >= new Date()) ? (item.salePrice == 0 ? "Free" : item.salePrice.toLocaleString()) : (item.price
+            == 0 ? "Free" : item.price.toLocaleString())
         }}</v-chip>
     </div>
     <v-img :src="'https://cdn.anolet.com/items/' + item.id + '/preview.png'" class="itemImage" height="200"></v-img>
@@ -53,9 +53,7 @@
 
     <v-card-actions>
       <v-spacer></v-spacer>
-      <template v-if="
-        !this.$root.me?.belongings.includes(item.id)
-      ">
+      <template v-if="this.$root?.me && !this.$root.me?.belongings.includes(item.id)">
         <v-btn class="fakebtn" disabled color="blue" flat prepend-icon="mdi-cash" variant="flat">
           Purchase
         </v-btn>

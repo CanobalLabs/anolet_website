@@ -16,10 +16,6 @@ relistItems();
           <v-list-item active-color="primary" to="/store/my-creations" @click="filter = 'my-creations'; relistItems();"
             v-if="this.$root.permissions?.includes('UPLOAD_SELF') || this.$root.permissions?.includes('UPLOAD_ANOLET')">
             <v-list-item-title>My Creations</v-list-item-title>
-
-            <template v-slot:append>
-              <v-btn color="grey-lighten-1" icon="mdi-plus" variant="text" size="small"></v-btn>
-            </template>
           </v-list-item>
           <v-list-item active-color="primary" disabled v-else>
             <v-list-item-title>Apply for UGC</v-list-item-title>

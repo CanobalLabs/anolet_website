@@ -3,7 +3,7 @@
     <div class="text-h6 font-weight-bold my-2">Popular Games</div>
     <v-row dense>
       <template v-for="game in games" :key="game.title">
-        <template v-if="game.privacyLevel == 0 || game.id == 1 || game.creator.id == this.$root.me.id">
+        <template v-if="game.privacyLevel == 0 || game.id == 1 || game.creator.id == this.$root?.me?.id">
           <v-col cols="4">
             <v-carousel hide-delimiters height="auto" show-arrows="hover" cycle>
               <v-carousel-item v-for="(item, i) in game.carouselImages" :key="i" :src="item"></v-carousel-item>
@@ -22,7 +22,7 @@
                 <v-spacer></v-spacer>
 
                 <v-btn @click="launch(game.id)"
-                  :disabled="(game.privacyLevel == 1 && game.creator.id != this.$root.me.id) || !this.$root.me"
+                  :disabled="!this.$root?.me || (game.privacyLevel == 1 && game.creator.id != this.$root.me.id)"
                   color="green" flat prepend-icon="mdi-play" variant="flat">Play</v-btn>
                 <v-btn v-if="game.id == 1" @click="launchPreview(game.id)" :disabled="!this.$root.me"
                   color="blue darken-1" flat prepend-icon="mdi-play-box" variant="flat">Play Preview</v-btn>

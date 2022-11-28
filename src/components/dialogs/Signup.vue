@@ -29,7 +29,8 @@ export default {
       }).then(res => {
         if (res.status == 200) {
           localStorage.setItem("ANALTOK", res.data.token);
-          window.location.reload();
+          this.$root.refresh();
+          this.$root.dialogs.signup = false;
         }
       })
     },
