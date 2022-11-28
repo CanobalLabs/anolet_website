@@ -1,28 +1,15 @@
 <template>
-    <v-dialog v-model="this.$root.dialogs.accountSettings" v-if="this.$root.me">
-        <v-card width="600px">
-            <v-card-title>Settings for {{ this.$root.me.username }}</v-card-title>
+    <v-dialog v-model="this.$root.dialogs.accountSettings">
+        <v-card width="300px">
+            <v-card-title>User Settings</v-card-title>
             <v-card-text>
-                <v-alert type="warning" v-if="!this.$root.me.email">Your account does not have an email associated with
-                    it. Remember to do this as soon as possible in case anything happens to your account!</v-alert>
-
-                <v-text-field v-model="this.$root.me.email" label="Email" type="email">
-                    <template v-slot:append>
-                        <v-btn color="blue darken-1" text @click="saveEmail()">
-                            Save
-                        </v-btn>
-                    </template>
+                <v-text-field v-model="this.$root.me2.email" label="Email" type="email" variant="outlined">
                     <template v-slot:prepend>
-                        <v-icon v-if="this.$root.me.emailVerified" icon="mdi-check-decagram" color="green"></v-icon>
+                        <v-icon v-if="this.$root.me2.emailVerified" icon="mdi-check-decagram" color="green"></v-icon>
                         <v-icon v-else icon="mdi-alert-octagon" color="yellow"></v-icon>
                     </template>
                 </v-text-field>
-                <v-text-field v-model="this.$root.me.username" label="Username">
-                    <template v-slot:append>
-                        <v-btn color="blue darken-1" text @click="saveName()">
-                            Save
-                        </v-btn>
-                    </template>
+                <v-text-field v-model="this.$root.me2.username" label="Username" variant="outlined">
                 </v-text-field>
             </v-card-text>
 
@@ -52,7 +39,7 @@ export default {
     methods: {
         saveEmail() {
             axios.post("https://api-staging.anolet.com/user/me/email/", {
-                email: this.$root.me.email
+                email: this.$root.me2.email
             },
                 {
                     headers: {
@@ -63,13 +50,13 @@ export default {
             ).then(res => {
                 if (res.status == 200) {
                     this.$root.dialogs.accountSettings = false;
-                    this.$root.refresh();
+                    this.$root.me.email = this.$root.me2.email
                 }
             })
         },
         saveName() {
             axios.post("https://api-staging.anolet.com/user/me/", {
-                username: this.$root.me.username
+                username: this.$root.me2.username
             },
                 {
                     headers: {
@@ -80,7 +67,7 @@ export default {
             ).then(res => {
                 if (res.status == 200) {
                     this.$root.dialogs.accountSettings = false;
-                    this.$root.refresh();
+                    this.$root.me.username = this.$root.me2.username;
                 }
             })
         },

@@ -48,6 +48,7 @@ export default {
 
   data: () => ({
     me: null,
+    me2: null,
     permissions: null,
     dialogs: {
       login: false,
@@ -82,6 +83,7 @@ export default {
         .then((res) => {
           if (res.data != "Unauthorized") {
             this.me = res.data;
+            this.me2 = res.data;
             axios
               .get(
                 "https://api-staging.anolet.com/user/" +
@@ -113,6 +115,7 @@ export default {
         .then((res) => {
           if (res.data != "Unauthorized") {
             this.me = res.data;
+            this.me2 = res.data;
             axios
               .get(
                 "https://api-staging.anolet.com/user/" +

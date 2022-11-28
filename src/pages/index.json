@@ -24,7 +24,6 @@
     {
         "name": "Groups",
         "path": "/groups",
-        "icon": "mdi-account-group",
-        "accountRequired": true
+        "icon": "mdi-account-group"
     }
 ]

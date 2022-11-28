@@ -2,7 +2,7 @@
   <v-navigation-drawer permanent>
     <v-divider></v-divider>
     <v-list nav active-color="primary">
-      <v-img src="https://anolet.com/Logo2.png" height="100" class="mx-1 my-2 siteLogo"></v-img>
+      <v-img src="https://anolet.com/Logo2.png" height="60" class="mx-1 my-2 siteLogo"></v-img>
       <v-list-item v-if="!this.$root.me" style="justify-content: center;">
         <div class="text-center">
           <v-btn color="green" @click="this.$root.dialogs.login = true">Login</v-btn>
@@ -22,33 +22,15 @@
     </v-list>
     <template v-slot:append v-if="this.$root.me">
 
-      <v-menu location="top">
-        <template v-slot:activator="{ props }">
-          <v-btn color="#1A2DC1" v-bind="props" class="mx-1" width="247">
-            Create
+          <v-btn disabled color="#1A2DC1" class="mx-1" width="247" v-if="this.$route.name == 'Games'">
+            Build a Game
           </v-btn>
-        </template>
-        <v-list class="adjustpos" color="blue">
-          <v-list-item @click="this.$root.dialogs.createItem = true" max-width="247">
-            <template v-slot:prepend>
-              <v-icon icon="mdi-wrench"></v-icon>
-            </template>
-            <v-list-item-title>Game</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="this.$root.dialogs.createGroup = true">
-            <template v-slot:prepend>
-              <v-icon icon="mdi-account-multiple-plus"></v-icon>
-            </template>
-            <v-list-item-title>Group</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="this.$root.dialogs.createGroup = true">
-            <template v-slot:prepend>
-              <v-icon icon="mdi-brush"></v-icon>
-            </template>
-            <v-list-item-title>Item</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+          <v-btn @click="this.$root.dialogs.createItem = true" color="#1A2DC1" class="mx-1" width="247" v-if="this.$route.name == 'Store' && (this.$root.permissions?.includes('UPLOAD_SELF') || this.$root.permissions?.includes('UPLOAD_ANOLET'))">
+            Design an Item
+          </v-btn>
+          <v-btn disabled color="#1A2DC1" class="mx-1" width="247" v-if="this.$route.name == 'Groups'">
+            Form a Group
+          </v-btn>
       <div class="mx-1 my-2">
         <MyselfCard></MyselfCard>
       </div>
@@ -61,6 +43,7 @@ import pages from "../pages/index.json";
 import truncate from "../utilities/truncate";
 import formatValue from "../utilities/formatValue";
 import MyselfCard from "./MyselfCard.vue";
+import { routeLocationKey } from "vue-router";
 
 export default {
   name: "Sidebar",

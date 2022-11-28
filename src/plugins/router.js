@@ -18,6 +18,16 @@ const routes = [
           ],
         alias: "/store/all",
         component: () => import('../pages/Store.vue')
+    },
+    {
+        path: '/avatar',
+        name: "My Avatar",
+        component: () => import('../pages/Avatar.vue')
+    },
+    {
+        path: '/groups',
+        name: "Groups",
+        component: () => import('../pages/Groups.vue')
     }
 ]
 
