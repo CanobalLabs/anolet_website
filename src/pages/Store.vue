@@ -24,13 +24,10 @@ relistItems();
         </v-list>
       </v-card>
     </v-col>
-    <template v-if="items != 'error'" v-for="item in items" :key="item.id">
+    <template v-for="item in items" :key="item.id">
       <v-col cols="3">
         <Item :item="item"></Item>
       </v-col>
-    </template>
-    <template v-else>
-      <v-alert type="error">Error fetching items. Your network may be having issues or the shop is currently undergoing maintenance.</v-alert>
     </template>
   </v-row>
 </template>
@@ -124,7 +121,6 @@ export default {
       .then((res) => {
           this.items = res.data;
           twemoji.parse(document.body);
-          if (status != 200) this.items = "error";
       });
   },
   components: {
