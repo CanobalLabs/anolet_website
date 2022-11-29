@@ -21,11 +21,10 @@
       </template>
     </v-list>
     <template v-slot:append v-if="this.$root.me">
-
           <v-btn disabled color="#1A2DC1" class="mx-1" width="247" v-if="this.$route.name == 'Games'">
             Build a Game
           </v-btn>
-          <v-btn @click="this.$root.dialogs.createItem = true" color="#1A2DC1" class="mx-1" width="247" v-if="this.$route.name == 'Store' && (this.$root.permissions?.includes('UPLOAD_SELF') || this.$root.permissions?.includes('UPLOAD_ANOLET'))">
+          <v-btn @click="this.$root.dialogs.createItem = true" color="#1A2DC1" class="mx-1" width="247" v-if="this.$route.path.startsWith('/store') && (this.$root.permissions?.includes('UPLOAD_SELF') || this.$root.permissions?.includes('UPLOAD_ANOLET'))">
             Design an Item
           </v-btn>
           <v-btn disabled color="#1A2DC1" class="mx-1" width="247" v-if="this.$route.name == 'Groups'">
@@ -43,7 +42,6 @@ import pages from "../pages/index.json";
 import truncate from "../utilities/truncate";
 import formatValue from "../utilities/formatValue";
 import MyselfCard from "./MyselfCard.vue";
-import { routeLocationKey } from "vue-router";
 
 export default {
   name: "Sidebar",

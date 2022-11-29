@@ -10,11 +10,11 @@ const routes = [
         path: '/store',
         name: "Store",
         children: [
-            { path: 'accessories', name: "Store" },
-            { path: 'bodies', name: "Store" },
-            { path: 'faces', name: "Store" },
-            { path: 'shoes', name: "Store" },
-            { path: 'my-creations', name: "Store" }
+            { path: 'accessories' },
+            { path: 'bodies' },
+            { path: 'faces' },
+            { path: 'shoes' },
+            { path: 'my-creations' }
           ],
         alias: "/store/all",
         component: () => import('../pages/Store.vue')

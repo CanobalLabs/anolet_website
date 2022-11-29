@@ -16,7 +16,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="this.$root.dialogs.signup = false">
+        <v-btn color="blue darken-1" text @click="this.$root.dialogs.createItem = false; type = ''; name = ''; description = ''; anoletAccount = false">
           Close
         </v-btn>
         <v-btn color="blue darken-1" text @click="createItem()">Create</v-btn>
@@ -53,7 +53,7 @@ export default {
           if (res.status == 200) {
             this.$root.startToast("Item created", "green", 3000);
             this.$root.dialogs.createItem = false;
-            this.$router.push("/store/my-creations")
+            this.type = ''; this.name = ''; this.description = ''; this.anoletAccount = false
           }
         })
     }
