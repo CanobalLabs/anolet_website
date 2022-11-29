@@ -24,7 +24,7 @@ export default {
   name: "Login",
   methods: {
     submitLogin(username, password) {
-      axios.post("https://api-staging.anolet.com/login/", {
+      axios.post(this.$root.baseURL + "/login/", {
         username, password
       }).then(res => {
         if (res.status == 200) {

@@ -36,7 +36,7 @@
 img.emoji {
   height: 1em;
   width: 1em;
-  margin: 0 .05em 0 .1em;
+  margin: 0 0.05em 0 0.1em;
   vertical-align: -0.1em;
 }
 
@@ -61,6 +61,15 @@ img.emoji {
 .adjustpos {
   margin-left: -8px;
   margin-right: 8px;
+}
+
+.uploadbtn {
+  bottom: 25%;
+  left: 25%;  
+}
+
+.input {
+  margin-top: -20px;
 }
 
 .chiparea {

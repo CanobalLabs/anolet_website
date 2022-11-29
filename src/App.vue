@@ -15,7 +15,7 @@
       </v-snackbar>
     </v-main>
   </v-app>
-  <div id="playerbg"><iframe src="https://client.anolet.com/loading.html" id="player" frameBorder="0"></iframe></div>
+  <div id="playerbg"><iframe :src="this.$root.clientURL + '/loading.html'" id="player" frameBorder="0"></iframe></div>
 </template>
 
 <script>
@@ -37,8 +37,8 @@ function handleDisconnect(event) {
     setTimeout(function () {
       document.getElementById("player").style.display = "none";
     }, 800);
-    document.getElementById("player").src = "https://client.anolet.com/loading.html";
     document.exitFullscreen();
+    document.getElementById("player").src = this.$root.clientURL + '/loading.html';
   }
 }
 window.addEventListener("message", handleDisconnect, false);
@@ -49,6 +49,9 @@ export default {
   data: () => ({
     me: null,
     me2: null,
+    baseURL: "https://api-staging.anolet.com",
+    cdnURL: "https://cdn.anolet.com",
+    clientURL: "https://client.anolet.com",
     permissions: null,
     dialogs: {
       login: false,
@@ -74,7 +77,7 @@ export default {
     },
     refresh() {
       axios
-        .get("https://api-staging.anolet.com/user/me", {
+        .get(this.$root.baseURL + "/user/me", {
           headers: {
             "Content-Type": "application/json",
             Authorization: localStorage.ANALTOK,
@@ -86,7 +89,7 @@ export default {
             this.me2 = res.data;
             axios
               .get(
-                "https://api-staging.anolet.com/user/" +
+                this.$root.baseURL + "/user/" +
                 res.data.id +
                 "/permissions",
                 {
@@ -106,7 +109,7 @@ export default {
   created: function () {
     if (localStorage.ANALTOK) {
       axios
-        .get("https://api-staging.anolet.com/user/me", {
+        .get(this.$root.baseURL + "/user/me", {
           headers: {
             "Content-Type": "application/json",
             Authorization: localStorage.ANALTOK,
@@ -118,7 +121,7 @@ export default {
             this.me2 = res.data;
             axios
               .get(
-                "https://api-staging.anolet.com/user/" +
+                this.$root.baseURL + "/user/" +
                 res.data.id +
                 "/permissions",
                 {

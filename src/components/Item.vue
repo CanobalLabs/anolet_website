@@ -1,8 +1,8 @@
 <template>
   <v-card theme="light" class="fill-height">
     <div class="chiparea-left">
-      <v-chip v-if="item.manager == this.$root.me?.id">{{ item.sales }} Sale<template
-          v-if="item.sales != 1">s</template></v-chip>
+      <v-chip v-if="item.manager == this.$root.me?.id"><template v-if="item.available">{{ item.sales }} Sale<template
+            v-if="item.sales != 1">s</template></template><template v-else>Draft</template></v-chip>
       <template v-if="new Date(item.saleEnd) >= new Date()">
         <v-chip :class="item.manager == this.$root.me?.id ? 'spacechip' : ''" color="red">{{ 100 - ((item.salePrice *
             100) / item.price)
@@ -18,17 +18,25 @@
     <div class="chiparea">
       <v-chip color="green">
         <Amulet v-if="(new Date(item.saleEnd) >= new Date()) ? item.salePrice != 0 : item.price != 0"></Amulet>
-        {{ (new Date(item.saleEnd) >= new Date()) ? (item.salePrice == 0 ? "Free" : item.salePrice.toLocaleString()) : (item.price
-            == 0 ? "Free" : item.price.toLocaleString())
-        }}</v-chip>
+        {{ (new Date(item.saleEnd) >= new Date()) ? (item.salePrice == 0 ? "Free" : item.salePrice.toLocaleString()) :
+            (item.price
+              == 0 ? "Free" : item.price.toLocaleString())
+        }}
+      </v-chip>
     </div>
-    <v-img :src="'https://cdn.anolet.com/items/' + item.id + '/preview.png'" class="itemImage" height="200"></v-img>
+    <v-img :src="item.assetUploaded ? this.$root.cdnURL + '/items/' + item.id + '/preview.png' : ''" class="itemImage"
+      height="200"></v-img>
+    <v-btn :loading="pendingUpload" v-if="item.manager == this.$root.me.id && item.assetUploaded == false"
+      class="uploadbtn" @click="upload(item.id)" color="blue" flat prepend-icon="mdi-upload" variant="flat">
+      Upload Asset
+      <input type="file" style="display: none" :id="'item_asset_' + item.id" accept="image/png" />
+    </v-btn>
     <v-list-item class="w-100">
       <template v-slot:prepend>
         <v-avatar :image="
-          item.manager != 'anolet' ? 'https://api-staging.anolet.com/user/' +
-          item.manager +
-          '/avatar' : 'https://preview.anolet.com/AnoletLogoLarge.png'
+          item.manager != 'anolet' ? this.$root.baseURL + '/user/' +
+            item.manager +
+            '/avatar' : 'https://preview.anolet.com/AnoletLogoLarge.png'
         " rounded="0"></v-avatar>
       </template>
 
@@ -38,8 +46,10 @@
       </v-list-item-title>
 
       <template v-if="item.owner != item.manager">
-        <v-list-item-subtitle>designed by <b>{{ item.manager == 'anolet' ? 'Anolet Staff' : item.manager }}</b></v-list-item-subtitle>
-        <v-list-item-subtitle>sold by <b>{{ item.owner == 'anolet' ? 'Anolet Staff' : item.owner }}</b></v-list-item-subtitle>
+        <v-list-item-subtitle>designed by <b>{{ item.manager == 'anolet' ? 'Anolet Staff' : item.manager }}</b>
+        </v-list-item-subtitle>
+        <v-list-item-subtitle>sold by <b>{{ item.owner == 'anolet' ? 'Anolet Staff' : item.owner }}</b>
+        </v-list-item-subtitle>
       </template>
       <template v-if="item.owner == item.manager">
         <v-list-item-subtitle>designed & sold by
@@ -53,23 +63,31 @@
 
     <v-card-actions>
       <v-spacer></v-spacer>
-      <template v-if="this.$root?.me && !this.$root.me?.belongings.includes(item.id)">
+      <template v-if="this.item.available && this.$root?.me && !this.$root.me?.belongings.includes(item.id)">
         <v-btn class="fakebtn" disabled color="blue" flat prepend-icon="mdi-cash" variant="flat">
           Purchase
         </v-btn>
 
-        <v-btn class="realbtn" @click="purchase(item.id)" :disabled="item.available == false" color="blue" flat
-          prepend-icon="mdi-cash" variant="flat">
+        <v-btn class="realbtn" @click="purchase(item.id)" color="blue" flat prepend-icon="mdi-cash" variant="flat">
           Purchase
         </v-btn>
       </template>
-      <template v-if="this.$root.me?.belongings.includes(item.id)">
+      <template v-if="item.available && this.$root.me?.belongings.includes(item.id)">
         <v-btn class="fakebtn" variant="outlined" color="red">
           Owned
         </v-btn>
 
         <v-btn class="realbtn" variant="outlined" color="red">
           Owned
+        </v-btn>
+      </template>
+      <template v-if="!item.available">
+        <v-btn class="fakebtn" disabled color="blue" flat prepend-icon="mdi-pencil" variant="flat">
+          Edit
+        </v-btn>
+
+        <v-btn class="realbtn" @click="edit(item.id)" color="blue" flat prepend-icon="mdi-pencil" variant="flat">
+          Edit
         </v-btn>
       </template>
     </v-card-actions>
@@ -80,7 +98,8 @@
 import axios from "axios";
 import { DateTime, Interval } from "luxon";
 import humanizeDuration from "humanize-duration";
-import Amulet from "./Amulet.vue"
+import Amulet from "./Amulet.vue";
+
 export default {
   name: "Store",
   props: {
@@ -92,13 +111,51 @@ export default {
   data: () => ({
     DateTime: DateTime,
     Interval: Interval,
-    humanizeDuration: humanizeDuration
+    humanizeDuration: humanizeDuration,
+    pendingUpload: false
   }),
   methods: {
+    upload(id) {
+      document.getElementById("item_asset_" + id).click();
+      if (document.getElementById("item_asset_" + id).getAttribute('listening') == null) {
+        document.getElementById("item_asset_" + id).setAttribute('listening', 'true')
+        document.getElementById("item_asset_" + id).addEventListener('change', (event) => {
+          this.pendingUpload = true;
+          // Mostly copied from https://stackoverflow.com/a/44161989
+          const input = event.target
+          if ('files' in input && input.files.length > 0) {
+            const reader = new FileReader()
+            new Promise((resolve, reject) => {
+              reader.onload = evt => resolve(evt.target.result)
+              reader.onerror = error => reject(error)
+              reader.readAsBinaryString(input.files[0])
+            }).then(content => {
+              axios.post(this.$root.baseURL + "/item/" + id + "/upload", input.files[0],
+                {
+                  headers: {
+                    "Content-Type": "image/png",
+                    Authorization: localStorage.ANALTOK,
+                  },
+                }
+              ).then((res) => {
+                if (res.status == 200) {
+                  setTimeout(() => {
+                    // We wait for preview image to finish generating
+                    this.$root.startToast("Uploaded item image", "green", 4000);
+                    this.pendingUpload = false;
+                    this.item.assetUploaded = true;
+                  }, 3000);
+                }
+              });
+            }).catch(error => console.log(error));
+          }
+        });
+      }
+    },
     purchase(id) {
       axios
         .post(
-          "https://api-staging.anolet.com/item/" + id + "/purchase",
+          this.$root.baseURL + "/item/" + id + "/purchase",
           undefined,
           {
             headers: {
@@ -126,4 +183,5 @@ export default {
     },
   },
 };
+
 </script>

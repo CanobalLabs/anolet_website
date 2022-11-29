@@ -46,7 +46,7 @@ export default {
   }),
   methods: {
     launch(id) {
-      document.getElementById("player").src = "https://client.anolet.com/?game=" + id + "&auth=" + localStorage.ANALTOK;
+      document.getElementById("player").src = this.$root.clientURL + "/?game=" + id + "&auth=" + localStorage.ANALTOK;
       document.getElementById("player").style["z-index"] = "1005";
       document.getElementById("player").style.display = "block";
       document.body.requestFullscreen();
@@ -66,7 +66,7 @@ export default {
   },
   created: function () {
     axios
-      .get("https://api-staging.anolet.com/game/s", {
+      .get(this.$root.baseURL + "/game/s", {
         headers: {
           "Content-Type": "application/json",
           Authorization: localStorage.ANALTOK,
