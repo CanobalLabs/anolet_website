@@ -26,7 +26,7 @@
     </div>
     <v-img :src="item.assetUploaded ? this.$root.cdnURL + '/items/' + item.id + '/preview.png' : ''" class="itemImage"
       height="200"></v-img>
-    <v-btn :loading="pendingUpload" v-if="item.manager == this.$root.me.id && item.assetUploaded == false"
+    <v-btn :loading="pendingUpload" v-if="item.manager == this.$root.me?.id && item.assetUploaded == false"
       class="uploadbtn" @click="upload(item.id)" color="blue" flat prepend-icon="mdi-upload" variant="flat">
       Upload Asset
       <input type="file" style="display: none" :id="'item_asset_' + item.id" accept="image/png" />
@@ -63,7 +63,7 @@
 
     <v-card-actions>
       <v-spacer></v-spacer>
-      <template v-if="this.item.available && this.$root?.me && !this.$root.me?.belongings.includes(item.id)">
+      <template v-if="this.item.available && this.$root?.me && !this.$root.me?.belongings.includes(item.id) && item.manager != this.$root.me?.id">
         <v-btn class="fakebtn" disabled color="blue" flat prepend-icon="mdi-cash" variant="flat">
           Purchase
         </v-btn>
@@ -72,7 +72,7 @@
           Purchase
         </v-btn>
       </template>
-      <template v-if="item.available && this.$root.me?.belongings.includes(item.id)">
+      <template v-if="item.available && this.$root.me?.belongings.includes(item.id) && item.manager != this.$root.me?.id">
         <v-btn class="fakebtn" variant="outlined" color="red">
           Owned
         </v-btn>
@@ -81,12 +81,12 @@
           Owned
         </v-btn>
       </template>
-      <template v-if="!item.available">
+      <template v-if="item.manager == this.$root.me?.id">
         <v-btn class="fakebtn" disabled color="blue" flat prepend-icon="mdi-pencil" variant="flat">
           Edit
         </v-btn>
 
-        <v-btn class="realbtn" @click="edit(item.id)" color="blue" flat prepend-icon="mdi-pencil" variant="flat">
+        <v-btn class="realbtn" @click="evt.$emit('item_edit', item);" color="blue" flat prepend-icon="mdi-pencil" variant="flat">
           Edit
         </v-btn>
       </template>
@@ -99,6 +99,7 @@ import axios from "axios";
 import { DateTime, Interval } from "luxon";
 import humanizeDuration from "humanize-duration";
 import Amulet from "./Amulet.vue";
+import evt from '../utilities/eventBus.js'
 
 export default {
   name: "Store",
@@ -112,7 +113,8 @@ export default {
     DateTime: DateTime,
     Interval: Interval,
     humanizeDuration: humanizeDuration,
-    pendingUpload: false
+    pendingUpload: false,
+    evt: evt
   }),
   methods: {
     upload(id) {
@@ -124,12 +126,6 @@ export default {
           // Mostly copied from https://stackoverflow.com/a/44161989
           const input = event.target
           if ('files' in input && input.files.length > 0) {
-            const reader = new FileReader()
-            new Promise((resolve, reject) => {
-              reader.onload = evt => resolve(evt.target.result)
-              reader.onerror = error => reject(error)
-              reader.readAsBinaryString(input.files[0])
-            }).then(content => {
               axios.post(this.$root.baseURL + "/item/" + id + "/upload", input.files[0],
                 {
                   headers: {
@@ -147,7 +143,6 @@ export default {
                   }, 3000);
                 }
               });
-            }).catch(error => console.log(error));
           }
         });
       }
@@ -174,7 +169,6 @@ export default {
             } else {
               this.$root.me.amulets = this.item.price
             }
-            // this.$root.me.amulets = 0
           }
         });
     },

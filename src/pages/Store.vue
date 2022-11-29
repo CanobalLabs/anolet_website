@@ -35,6 +35,7 @@ relistItems();
 <script>
 import axios from "axios";
 import Item from "../components/Item.vue";
+import evt from '../utilities/eventBus.js'
 
 export default {
   name: "Store",
@@ -71,6 +72,25 @@ export default {
       },
     ],
   }),
+  mounted: function () {
+    evt.$on('refresh_store', (type) => { // here you need to use the arrow function
+      axios
+        .get(this.$root.baseURL + "/item/s", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.ANALTOK,
+            "x-anolet-filter": type || this.filter,
+            "x-anolet-search": this.search,
+          },
+        })
+        .then((res) => {
+          if (res.data != "Unauthorized") {
+            this.items = res.data;
+            twemoji.parse(document.body);
+          }
+        });
+    })
+  },
   methods: {
     relistItems() {
       axios
