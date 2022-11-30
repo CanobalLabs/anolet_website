@@ -26,14 +26,14 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" text
-          @click="this.$root.dialogs.createItem = false; this.$root.createItemState = 'create'; type = ''; name = ''; description = ''; anoletAccount = false; price = 0; available = false; saleEnd = '2001-01-01T05:00:00.000Z'; salePrice = 0; id = '';">
+          @click="this.$root.dialogs.createItem = false; this.$root.createItemState = 'create'; type = ''; name = ''; description = ''; anoletAccount = false; price = 0; available = false; saleEnd = '2001-01-01T05:00:00.000Z'; salePrice = 0; id = ''; assetUploaded = false">
           Cancel
         </v-btn>
         <v-btn v-if="this.$root.createItemState == 'create'" color="blue darken-1" text @click="createItem()">Create
         </v-btn>
         <template v-else-if="this.$root.createItemState == 'edit'">
           <v-btn color="blue darken-1" text @click="save(false)">Save</v-btn>
-          <v-btn v-if="this.available == false" color="green darken-1" text @click="save(true)">Save &
+          <v-btn v-if="this.available == false && this.assetUploaded" color="green darken-1" text @click="save(true)">Save &
             Release</v-btn>
         </template>
       </v-card-actions>
@@ -61,6 +61,7 @@ export default {
     saleEnd: '2001-01-01T05:00:00.000Z',
     salePrice: 0,
     id: "",
+    assetUploaded: false,
     evt: evt
   }),
   mounted: function () {
@@ -74,6 +75,7 @@ export default {
       this.available = item.available
       this.saleEnd = item.saleEnd
       this.salePrice = item.salePrice
+      this.assetUploaded = item.assetUploaded
       this.id = item.id
     })
   },
@@ -98,7 +100,7 @@ export default {
           if (res.status == 200) {
             this.$root.startToast("Item edited", "green", 3000);
             this.$root.dialogs.createItem = false;
-            this.$root.createItemState = 'create'; this.type = ''; this.name = ''; this.description = ''; this.anoletAccount = false; this.price = 0; this.available = false; this.saleEnd = "2001-01-01T05:00:00.000Z"; this.salePrice = 0; this.id = "";
+            this.$root.createItemState = 'create'; this.type = ''; this.name = ''; this.description = ''; this.anoletAccount = false; this.price = 0; this.available = false; this.saleEnd = "2001-01-01T05:00:00.000Z"; this.salePrice = 0; this.id = ""; this.assetUploaded = false;
             evt.$emit('refresh_store', "");
           }
         })
