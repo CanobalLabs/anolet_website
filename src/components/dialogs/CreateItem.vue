@@ -26,7 +26,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" text
-          @click="this.$root.dialogs.createItem = false; type = ''; name = ''; description = ''; anoletAccount = false; this.$root.editingItem = null; this.$root.createItemState = 'create'">
+          @click="this.$root.dialogs.createItem = false; this.$root.createItemState = 'create'; type = ''; name = ''; description = ''; anoletAccount = false; price = 0; available = false; saleEnd = '2001-01-01T05:00:00.000Z'; salePrice = 0; id = '';">
           Cancel
         </v-btn>
         <v-btn v-if="this.$root.createItemState == 'create'" color="blue darken-1" text @click="createItem()">Create
@@ -98,9 +98,8 @@ export default {
           if (res.status == 200) {
             this.$root.startToast("Item edited", "green", 3000);
             this.$root.dialogs.createItem = false;
-            this.type = ''; this.name = ''; this.description = ''; this.anoletAccount = false; this.price = 0; this.available = false; this.saleEnd = "2001-01-01T05:00:00.000Z"; this.salePrice = 0; this.id = "";
+            this.$root.createItemState = 'create'; this.type = ''; this.name = ''; this.description = ''; this.anoletAccount = false; this.price = 0; this.available = false; this.saleEnd = "2001-01-01T05:00:00.000Z"; this.salePrice = 0; this.id = "";
             evt.$emit('refresh_store', "");
-            this.$root.createItemState = 'create'
           }
         })
     },
