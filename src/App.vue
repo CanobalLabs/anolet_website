@@ -31,17 +31,6 @@ import axios from "axios";
 
 twemoji.parse(document.body)
 
-window.onmessage = function (e) {
-  if (e.data == 'disconnect') {
-    document.getElementById("player").style.opacity = "0";
-    setTimeout(function () {
-      document.getElementById("player").style.display = "none";
-    }, 800);
-    document.exitFullscreen();
-    document.getElementById("player").src = this.$root.clientURL + '/loading.html';
-  }
-};
-
 export default {
   name: "App",
 
@@ -135,6 +124,18 @@ export default {
               });
           }
         });
+
+
+      window.onmessage = function (e) {
+        if (e.data == 'disconnect') {
+          document.getElementById("player").style.opacity = "0";
+          setTimeout(function () {
+            document.getElementById("player").style.display = "none";
+          }, 800);
+          document.exitFullscreen();
+          document.getElementById("player").src = this.$root.clientURL + '/loading.html';
+        }
+      };
     }
   },
 
