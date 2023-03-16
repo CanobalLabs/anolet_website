@@ -31,8 +31,8 @@ import axios from "axios";
 
 twemoji.parse(document.body)
 
-function handleDisconnect(event) {
-  if (event.data == "disconnect") {
+window.onmessage = function (e) {
+  if (e.data == 'disconnect') {
     document.getElementById("player").style.opacity = "0";
     setTimeout(function () {
       document.getElementById("player").style.display = "none";
@@ -40,8 +40,7 @@ function handleDisconnect(event) {
     document.exitFullscreen();
     document.getElementById("player").src = this.$root.clientURL + '/loading.html';
   }
-}
-window.addEventListener("message", handleDisconnect, false);
+};
 
 export default {
   name: "App",
