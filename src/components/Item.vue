@@ -36,7 +36,7 @@
         <v-avatar :image="
           item.manager != 'anolet' ? this.$root.baseURL + '/user/' +
             item.manager +
-            '/avatar' : 'https://preview.anolet.com/AnoletLogoLarge.png'
+            '/avatar/preview' : '/AnoletLogoLarge.png'
         " rounded="0"></v-avatar>
       </template>
 
