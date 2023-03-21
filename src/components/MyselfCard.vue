@@ -12,7 +12,7 @@
     </v-card-item>
     <v-divider></v-divider>
     <v-img
-      :src="'https://api-staging.anolet.com/user/anolet/' + this.$root.me.id + '/preview"
+      :src="'https://api-staging.anolet.com/user/anolet/' + this.$root.me.id + '/preview'"
       class="avatarImage" height="200"></v-img>
   </v-card>
 </template>
