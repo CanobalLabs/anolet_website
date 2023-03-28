@@ -27,6 +27,8 @@ import ManageGames from "./components/dialogs/ManageGames.vue";
 import CreateItem from "./components/dialogs/CreateItem.vue";
 import Alerts from "./components/Alerts.vue";
 
+const clientURL = "https://client.anolet.com"
+
 import axios from "axios";
 
 twemoji.parse(document.body)
@@ -39,7 +41,7 @@ export default {
     me2: null,
     baseURL: "https://api-staging.anolet.com",
     cdnURL: "https://cdn.anolet.com",
-    clientURL: "https://client.anolet.com",
+    clientURL,
     permissions: null,
     dialogs: {
       login: false,
@@ -133,7 +135,7 @@ export default {
             document.getElementById("player").style.display = "none";
           }, 800);
           document.exitFullscreen();
-          document.getElementById("player").src = this.$root.clientURL + '/loading.html';
+          document.getElementById("player").src = clientURL + '/loading.html';
         }
       };
     }
