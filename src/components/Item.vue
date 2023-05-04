@@ -17,7 +17,7 @@
     </div>
     <div class="chiparea">
       <v-chip color="green">
-        <Amulet v-if="(new Date(item.saleEnd) >= new Date()) ? item.salePrice != 0 : item.price != 0"></Amulet>
+        <Gem v-if="(new Date(item.saleEnd) >= new Date()) ? item.salePrice != 0 : item.price != 0"></Gem>
         {{ (new Date(item.saleEnd) >= new Date()) ? (item.salePrice == 0 ? "Free" : item.salePrice.toLocaleString()) :
             (item.price
               == 0 ? "Free" : item.price.toLocaleString())
@@ -98,7 +98,7 @@
 import axios from "axios";
 import { DateTime, Interval } from "luxon";
 import humanizeDuration from "humanize-duration";
-import Amulet from "./Amulet.vue";
+import Gem from "./Gem.vue";
 import evt from '../utilities/eventBus.js'
 
 export default {
@@ -107,7 +107,7 @@ export default {
     item: Object
   },
   components: {
-    Amulet
+    Gem
   },
   data: () => ({
     DateTime: DateTime,
@@ -165,9 +165,9 @@ export default {
             this.$root.startToast("Purchased item", "green", 4000);
             if (new Date(item.saleEnd) >= new Date()) {
               // On sale
-              this.$root.me.amulets = this.item.salePrice
+              this.$root.me.gems = this.item.salePrice
             } else {
-              this.$root.me.amulets = this.item.price
+              this.$root.me.gems = this.item.price
             }
           }
         });

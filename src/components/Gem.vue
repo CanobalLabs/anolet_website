@@ -1,15 +1,15 @@
 <template>
-  <img class="amulet" src="/Amulet.png">
+  <img class="gem" src="/Gem.png">
 </template>
 
 <script>
 export default {
-    name: "Amulet",
+    name: "Gem",
 }
 </script>
 
 <style>
-.amulet {
+.gem {
     width: 1rem;
     margin-right: 4px;
 }

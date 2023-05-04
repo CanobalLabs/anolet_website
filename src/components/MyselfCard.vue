@@ -3,7 +3,7 @@
     <v-card-item>
       <v-card-title>{{ this.$root.me.username }}<div class="chiparea">
           <v-chip color="green" variant="elevated">
-            <Amulet></Amulet>{{ this.$root.me.amulets.toLocaleString() }}
+            <Gem></Gem>{{ this.$root.me.gems.toLocaleString() }}
           </v-chip>
         </div>
         <v-btn color="grey-lighten-1" icon="mdi-cog" variant="text" size="small" class="mx-1"
@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import Amulet from "./Amulet.vue";
+import Gem from "./Gem.vue";
 
 export default {
   name: "MyselfCard",
   components: {
-    Amulet
+    Gem
   }
 }
 </script>
