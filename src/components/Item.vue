@@ -58,7 +58,7 @@
       </template>
     </v-list-item>
     <v-card-item>
-      <v-card-description v-text="item.description"></v-card-description>
+      <v-card-description>{{ item.description }}</v-card-description>
     </v-card-item>
 
     <v-card-actions>
