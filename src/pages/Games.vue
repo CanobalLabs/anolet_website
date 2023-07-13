@@ -47,7 +47,7 @@ export default {
   methods: {
     launch(id) {
       document.getElementById("player").src = this.$root.clientURL + "/?game=" + id + "&auth=" + localStorage.ANALTOK;
-      document.getElementById("player").style["z-index"] = "1005";
+      document.getElementById("player").style["z-index"] = "10050";
       document.getElementById("player").style.display = "block";
       document.body.requestFullscreen();
       setTimeout(function () {
@@ -56,7 +56,7 @@ export default {
     },
     launchPreview() {
       document.getElementById("player").src = "https://preview.anolet.com/";
-      document.getElementById("player").style["z-index"] = "1005";
+      document.getElementById("player").style["z-index"] = "10050z";
       document.getElementById("player").style.display = "block";
       document.body.requestFullscreen();
       setTimeout(function () {
