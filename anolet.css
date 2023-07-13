@@ -10,61 +10,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Secular+One&display=swap');
 
-@keyframes logoFIO {
-    0% {
-    opacity:1;
-  }
-  45% {
-  opacity:1;
-  }
-  55% {
-  opacity:0;
-  }
-  100% {
-  opacity:0;
-  }
-  }
-
-  @keyframes fadeCol {
-    0% {
-    background: black;
-  }
-  45% {
-  background: black;
-  }
-  55% {
-  background: white;
-  }
-  100% {
-  background: white;
-  }
-  }
-
-  @keyframes fadeText {
-    0% {
-    color: black;
-  }
-  45% {
-  color: black;
-  }
-  55% {
-  color: white;
-  }
-  100% {
-  color: white;
-  }
-  }
-
 body {
   padding: 0;
   margin: 0;
   background: #101010;
   font-family: "Circular Std";
   color: white;
-}
-
-.altlogo {
-    animation: logoFIO ease-out infinite 5s alternate;
 }
 
 .fade {
@@ -96,6 +47,7 @@ h2 {
 
 .center {
     text-align: center;
+    color: black
 }
 
 .fade {
@@ -104,7 +56,7 @@ h2 {
     height: 270px;
     z-index: -1;
     top: 0;
-    background: black;
+    background: white;
 }
 
 .discordInvite {
