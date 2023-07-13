@@ -37,7 +37,7 @@
           item.manager != 'anolet' ? this.$root.baseURL + '/user/' +
             item.manager +
             '/avatar/preview' : '/AnoletLogoLarge.png'
-        " rounded="0"></v-avatar>
+        " rounded="0" class="avatarOverflowVisible"></v-avatar>
       </template>
 
       <v-list-item-title class="font-weight-bold">{{ item.name }} <v-chip class="mx-0" size="x-small">

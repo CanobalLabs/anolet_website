@@ -98,6 +98,18 @@ img.emoji {
   background: url("loading.png") center center no-repeat;
 }
 
+.avatarOverflowVisible {
+  overflow: visible !important;
+}
+
+.avatarOverflowVisible > .v-img > img {
+  overflow: visible !important;
+}
+
+.avatarOverflowVisible > .v-img {
+  overflow: visible !important;
+}
+
 .chiparea-left {
   position: absolute;
   top: 10px;
