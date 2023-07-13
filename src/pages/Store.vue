@@ -10,7 +10,7 @@
   filter = item.filter;
 relistItems();
             ">
-            <v-list-item-title v-text="item.title"></v-list-item-title>
+            <v-list-item-title>{{  item.title }}</v-list-item-title>
           </v-list-item>
 
           <v-list-item active-color="primary" to="/store/my-creations" @click="filter = 'my-creations'; relistItems();"

@@ -1,10 +1,9 @@
 <template>
   <v-dialog v-model="this.$root.dialogs.login">
-    <v-card width="300px">
-      <v-card-title>Login to your account</v-card-title>
+    <v-card width="350px">
+      <v-card-title class="text-center text-bold">Join the fun</v-card-title>
       <v-card-text>
-        <v-text-field v-model="username" label="Username" required min="3" max="20"></v-text-field>
-        <v-text-field v-model="password" label="Password" type="password" required></v-text-field>
+        <v-text-field v-model="auth" label="Email" required min="3" max="20" variant="solo-filled"></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -36,8 +35,7 @@ export default {
     },
   },
   data: () => ({
-    username: "",
-    password: ""
+    auth: "",
   }),
 };
 </script>

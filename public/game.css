@@ -7,15 +7,31 @@
 .username {
   font-size: 1.01rem !important;
 }
+
+.logov2 {
+  width: fit-content !important;
+}
+
+.topbargem {
+  align-self: center !important;
+  margin-right: 10px !important;
+  background-color: rgba(1, 1, 1, 0) !important;
+  box-shadow: none !important;
+  color: white !important;
+  overflow: inherit !important;
+}
+
 .crownsbar {
   position: absolute;
   right: 0;
   padding-right: 20px;
   color: #00ff91 !important;
 }
+
 .itemImage > img {
   padding: 50px;
 }
+
 .siteLogo > img {
   padding: 10px;
 }
@@ -65,7 +81,7 @@ img.emoji {
 
 .uploadbtn {
   bottom: 25%;
-  left: 25%;  
+  left: 25%;
 }
 
 .input {
@@ -143,4 +159,8 @@ html::-webkit-scrollbar {
   padding-right: 50px;
   margin-top: -6.5px;
   line-height: 15px;
+}
+
+.v-overlay__content {
+  align-items: center !important;
 }

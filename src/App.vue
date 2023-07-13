@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Sidebar></Sidebar>
+    <Navs></Navs>
     <v-main style="margin: 16px">
       <Alerts></Alerts>
       <router-view></router-view>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Sidebar from "./components/Sidebar.vue";
+import Navs from "./components/Navs.vue";
 import Login from "./components/dialogs/Login.vue";
 import Signup from "./components/dialogs/Signup.vue";
 import AccountSettings from "./components/dialogs/AccountSettings.vue";
@@ -43,6 +43,7 @@ export default {
     cdnURL: "https://cdn.anolet.com",
     clientURL,
     permissions: null,
+    userLoaded: false,
     dialogs: {
       login: false,
       signup: false,
@@ -109,6 +110,7 @@ export default {
           if (res.data != "Unauthorized") {
             this.me = res.data;
             this.me2 = res.data;
+            this.userLoaded = true;
             axios
               .get(
                 this.$root.baseURL + "/user/" +
@@ -142,7 +144,7 @@ export default {
   },
 
   components: {
-    Sidebar,
+    Navs,
     Login,
     Signup,
     AccountSettings,

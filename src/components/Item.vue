@@ -1,5 +1,5 @@
 <template>
-  <v-card theme="light" class="fill-height">
+  <v-card class="fill-height">
     <div class="chiparea-left">
       <v-chip v-if="item.manager == this.$root.me?.id"><template v-if="item.available">{{ item.sales }} Sale<template
             v-if="item.sales != 1">s</template></template><template v-else>Draft</template></v-chip>

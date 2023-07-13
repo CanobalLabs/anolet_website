@@ -3,7 +3,7 @@
     <v-card-item>
       <v-card-title>{{ this.$root.me.username }}<div class="chiparea">
           <v-chip color="green" variant="elevated">
-            <Gem></Gem>{{ this.$root.me.gems.toLocaleString() }}
+            <Gem></Gem>{{ this.$root.me?.gems.toLocaleString() }}
           </v-chip>
         </div>
         <v-btn color="grey-lighten-1" icon="mdi-cog" variant="text" size="small" class="mx-1"
