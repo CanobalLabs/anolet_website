@@ -20,8 +20,7 @@
     <v-list nav active-color="primary">
       <v-list-item v-if="!this.$root.me" style="justify-content: center;">
         <div class="text-center">
-          <v-btn color="green" @click="this.$root.dialogs.login = true">Login</v-btn>
-          <v-btn color="blue" @click="this.$root.dialogs.signup = true">Signup</v-btn>
+          <v-btn color="green" @click="this.$root.dialogs.login = true">Login/Signup</v-btn>
         </div>
       </v-list-item>
       <template v-for="page in pages" :key="page.path">

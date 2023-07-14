@@ -78,6 +78,7 @@ export default {
           if (res.data != "Unauthorized") {
             this.me = res.data;
             this.me2 = res.data;
+            this.$root.userLoaded = true;
             axios
               .get(
                 this.$root.baseURL + "/user/" +

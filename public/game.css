@@ -74,6 +74,10 @@ img.emoji {
   margin-bottom: 5px;
 }
 
+.mbottom10 {
+  margin-bottom: 10px;
+}
+
 .adjustpos {
   margin-left: -8px;
   margin-right: 8px;
@@ -119,9 +123,6 @@ img.emoji {
 .spacechip {
   margin-right: 5px;
 }
-.spacechip {
-  margin-left: 5px;
-}
 
 #player {
   position: absolute;
@@ -144,6 +145,9 @@ html::-webkit-scrollbar {
 }
 
 .topmargin {
+  margin-top: 10px;
+}
+.bottommargin {
   margin-top: 10px;
 }
 
