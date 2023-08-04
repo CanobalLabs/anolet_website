@@ -1,3 +1,101 @@
+/* Anolet Theme
+
+.v-theme--anoletTheme {
+  color-scheme: dark !important;
+  --v-theme-background: 42,52,71 !important;
+  --v-theme-background-overlay-multiplier: 1 !important;
+  --v-theme-surface: 42,52,71 !important;
+  --v-theme-surface-overlay-multiplier: 1 !important;
+  --v-theme-surface-variant: 189,189,189 !important;
+  --v-theme-surface-variant-overlay-multiplier: 2 !important;
+  --v-theme-on-surface-variant: 42,52,71 !important;
+  --v-theme-primary: 93,135,255 !important;
+  --v-theme-primary-overlay-multiplier: 2 !important;
+  --v-theme-primary-darken-1: 55,0,179 !important;
+  --v-theme-primary-darken-1-overlay-multiplier: 1 !important;
+  --v-theme-secondary: 73,190,255 !important;
+  --v-theme-secondary-overlay-multiplier: 2 !important;
+  --v-theme-secondary-darken-1: 3,218,197 !important;
+  --v-theme-secondary-darken-1-overlay-multiplier: 2 !important;
+  --v-theme-error: 250,137,107 !important;
+  --v-theme-error-overlay-multiplier: 2 !important;
+  --v-theme-info: 83,155,255 !important;
+  --v-theme-info-overlay-multiplier: 2 !important;
+  --v-theme-success: 19,222,185 !important;
+  --v-theme-success-overlay-multiplier: 2 !important;
+  --v-theme-warning: 255,174,31 !important;
+  --v-theme-warning-overlay-multiplier: 2 !important;
+  --v-theme-accent: 250,137,107 !important;
+  --v-theme-accent-overlay-multiplier: 2 !important;
+  --v-theme-lightprimary: 37,54,98 !important;
+  --v-theme-lightprimary-overlay-multiplier: 1 !important;
+  --v-theme-lightsecondary: 28,69,93 !important;
+  --v-theme-lightsecondary-overlay-multiplier: 1 !important;
+  --v-theme-lightsuccess: 27,60,72 !important;
+  --v-theme-lightsuccess-overlay-multiplier: 1 !important;
+  --v-theme-lighterror: 75,49,61 !important;
+  --v-theme-lighterror-overlay-multiplier: 1 !important;
+  --v-theme-lightwarning: 77,58,42 !important;
+  --v-theme-lightwarning-overlay-multiplier: 1 !important;
+  --v-theme-textPrimary: 234,239,244 !important;
+  --v-theme-textPrimary-overlay-multiplier: 2 !important;
+  --v-theme-textSecondary: 124,143,172 !important;
+  --v-theme-textSecondary-overlay-multiplier: 2 !important;
+  --v-theme-borderColor: 51,63,85 !important;
+  --v-theme-borderColor-overlay-multiplier: 1 !important;
+  --v-theme-inputBorder: 70,86,112 !important;
+  --v-theme-inputBorder-overlay-multiplier: 1 !important;
+  --v-theme-containerBg: 42,52,71 !important;
+  --v-theme-containerBg-overlay-multiplier: 1 !important;
+  --v-theme-hoverColor: 51,63,85 !important;
+  --v-theme-hoverColor-overlay-multiplier: 1 !important;
+  --v-theme-grey100: 51,63,85 !important;
+  --v-theme-grey100-overlay-multiplier: 1 !important;
+  --v-theme-grey200: 70,86,112 !important;
+  --v-theme-grey200-overlay-multiplier: 1 !important;
+  --v-theme-on-background: 255,255,255 !important;
+  --v-theme-on-surface: 255,255,255 !important;
+  --v-theme-on-primary: 255,255,255 !important;
+  --v-theme-on-primary-darken-1: 255,255,255 !important;
+  --v-theme-on-secondary: 0,0,0 !important;
+  --v-theme-on-secondary-darken-1: 0,0,0 !important;
+  --v-theme-on-error: 255,255,255 !important;
+  --v-theme-on-info: 255,255,255 !important;
+  --v-theme-on-success: 0,0,0 !important;
+  --v-theme-on-warning: 0,0,0 !important;
+  --v-theme-on-accent: 255,255,255 !important;
+  --v-theme-on-lightprimary: 255,255,255 !important;
+  --v-theme-on-lightsecondary: 255,255,255 !important;
+  --v-theme-on-lightsuccess: 255,255,255 !important;
+  --v-theme-on-lighterror: 255,255,255 !important;
+  --v-theme-on-lightwarning: 255,255,255 !important;
+  --v-theme-on-textPrimary: 0,0,0 !important;
+  --v-theme-on-textSecondary: 255,255,255 !important;
+  --v-theme-on-borderColor: 255,255,255 !important;
+  --v-theme-on-inputBorder: 255,255,255 !important;
+  --v-theme-on-containerBg: 255,255,255 !important;
+  --v-theme-on-hoverColor: 255,255,255 !important;
+  --v-theme-on-grey100: 255,255,255 !important;
+  --v-theme-on-grey200: 255,255,255 !important;
+  --v-border-color: 51, 63, 85 !important;
+  --v-border-opacity: 0.12 !important;
+  --v-high-emphasis-opacity: 1 !important;
+  --v-medium-emphasis-opacity: 0.7 !important;
+  --v-disabled-opacity: 0.5 !important;
+  --v-idle-opacity: 0.1 !important;
+  --v-hover-opacity: 0.04 !important;
+  --v-focus-opacity: 0.12 !important;
+  --v-selected-opacity: 0.08 !important;
+  --v-activated-opacity: 0.12 !important;
+  --v-pressed-opacity: 0.16 !important;
+  --v-dragged-opacity: 0.08 !important;
+  --v-theme-kbd: 33, 37, 41 !important;
+  --v-theme-on-kbd: 255, 255, 255 !important;
+  --v-theme-code: 52, 52, 52 !important;
+  --v-theme-on-code: 204, 204, 204 !important;
+}
+*/
+
 .pfp {
   /* fix later */
   height: 50px;
@@ -65,6 +163,13 @@ img.emoji {
 .fakebtn {
   opacity: 0 !important;
 }
+
+.realbtnleft {
+  position: absolute !important;
+  bottom: 8px;
+  left: 8px;
+}
+
 
 .avatarImage > img {
   padding: 25px;

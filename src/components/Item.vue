@@ -1,5 +1,5 @@
 <template>
-  <v-card class="fill-height">
+  <v-card class="fill-height" v-if="!deleted">
     <div class="chiparea-left">
       <v-chip v-if="item.manager == this.$root.me?.id"><template v-if="item.available">{{ item.sales }} Sale<template
             v-if="item.sales != 1">s</template></template><template v-else>Draft</template></v-chip>
@@ -62,6 +62,11 @@
     </v-card-item>
 
     <v-card-actions>
+      <template v-if="!this.item.available && item.manager == this.$root.me?.id">
+        <v-btn class="realbtnleft" @click="delete(item.id)" color="red" flat prepend-icon="mdi-delete" variant="flat">
+          Delete
+        </v-btn>
+      </template>
       <v-spacer></v-spacer>
       <template v-if="this.item.available && this.$root?.me && !this.$root.me?.belongings.includes(item.id) && item.manager != this.$root.me?.id">
         <v-btn class="fakebtn" disabled color="blue" flat prepend-icon="mdi-cash" variant="flat">
@@ -114,7 +119,8 @@ export default {
     Interval: Interval,
     humanizeDuration: humanizeDuration,
     pendingUpload: false,
-    evt: evt
+    evt: evt,
+    deleted: false
   }),
   methods: {
     upload(id) {
@@ -170,6 +176,24 @@ export default {
               this.$root.me.gems = this.item.price
             }
           }
+        });
+    },
+    delete(id) {
+      console.log("sending req")
+      axios.delete(
+          this.$root.baseURL + "/item/" + id,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: localStorage.ANALTOK,
+            },
+          }
+        )
+        .then((res) => {
+          if (res.status == 200) {
+            this.deleted = true;
+          }
+          console.log(res)
         });
     },
     typeFormat(type) {

@@ -25,9 +25,9 @@ const routes = [
         component: () => import('../pages/Avatar.vue')
     },
     {
-        path: '/groups',
-        name: "Groups",
-        component: () => import('../pages/Groups.vue')
+        path: '/gangs',
+        name: "Gangs",
+        component: () => import('../pages/Gangs.vue')
     }
 ]
 

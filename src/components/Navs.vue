@@ -41,8 +41,8 @@
         v-if="this.$route.path.startsWith('/store') && (this.$root.permissions?.includes('UPLOAD_SELF') || this.$root.permissions?.includes('UPLOAD_ANOLET'))">
         Design an Item
       </v-btn>
-      <v-btn disabled color="#1A2DC1" class="mx-1" width="247" v-if="this.$route.name == 'Groups'">
-        Form a Group
+      <v-btn disabled color="#1A2DC1" class="mx-1" width="247" v-if="this.$route.name == 'Gangs'">
+        Form a Gang
       </v-btn>
       <div class="mx-1 my-2">
         <MyselfCard></MyselfCard>

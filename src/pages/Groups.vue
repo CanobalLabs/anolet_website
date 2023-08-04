@@ -5,6 +5,6 @@
 
 <script>
 export default {
-    name: "Groups"
+    name: "Gangs"
 }
 </script>
