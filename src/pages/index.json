@@ -24,6 +24,6 @@
     {
         "name": "Gangs",
         "path": "/gangs",
-        "icon": "mdi-account-gang"
+        "icon": "mdi-account-group"
     }
 ]

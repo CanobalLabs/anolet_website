@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar>
+  <v-app-bar flat border="b">
 
     <template v-slot:prepend>
       <v-img src="/longform20bd.png" width="190" class="shrink" />
@@ -17,7 +17,8 @@
   </v-app-bar>
   <v-navigation-drawer permanent>
     <v-divider></v-divider>
-    <v-list nav active-color="primary">
+    <v-list nav active-color="primary" density="compact" >
+      
       <v-list-item v-if="!this.$root.me" style="justify-content: center;">
         <div class="text-center">
           <v-btn color="green" @click="this.$root.dialogs.login = true">Login/Signup</v-btn>
@@ -35,7 +36,7 @@
     </v-list>
     <template v-slot:append v-if="this.$root.me">
       <v-btn disabled color="#1A2DC1" class="mx-1" width="247" v-if="this.$route.name == 'Games'">
-        Build a Game
+        Build a Games
       </v-btn>
       <v-btn @click="this.$root.dialogs.createItem = true" color="#1A2DC1" class="mx-1" width="247"
         v-if="this.$route.path.startsWith('/store') && (this.$root.permissions?.includes('UPLOAD_SELF') || this.$root.permissions?.includes('UPLOAD_ANOLET'))">

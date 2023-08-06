@@ -8,14 +8,14 @@
             <v-carousel hide-delimiters height="auto" show-arrows="hover" cycle>
               <v-carousel-item v-for="(item, i) in game.carouselImages" :key="i" :src="item"></v-carousel-item>
             </v-carousel>
-            <v-card>
+            <v-card flat>
 
               <v-card-item>
                 <v-card-title>{{ game.title }} <a class="gamePlayers">{{ game.playing }}</a><a v-if="game.id == 1"
                     class="gamePlayers previewP">{{ game.playingP }}</a></v-card-title>
                 <v-card-subtitle>by <b>{{ game.creator.name }}</b> <a class="playerstext">Online</a><a
                     class="playerstext preview" v-if="game.id == 1">Online<br>Preview</a></v-card-subtitle>
-                <v-card-description v-text="game.description"></v-card-description>
+                <v-card-description>{{  game.description }}</v-card-description>
               </v-card-item>
 
               <v-card-actions>

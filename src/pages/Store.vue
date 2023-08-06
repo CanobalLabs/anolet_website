@@ -3,7 +3,7 @@
     <v-col cols="3">
       <v-text-field label="Search" clearable variant="outlined" class="searchBar mx-auto" v-model="search"
         @input="(search.length >= 3 || search.length == 0) && relistItems()"></v-text-field>
-      <v-card class="mx-auto">
+      <v-card class="mx-auto" flat>
         <v-list selected="1">
           <v-list-item v-for="(item, i) in tabs" :key="i" :value="item.value" active-color="primary" :to="item.to"
             :disabled="item.disabled" @click="
