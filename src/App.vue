@@ -40,7 +40,7 @@ export default {
     me: null,
     me2: null,
     baseURL: "https://api-staging.anolet.com",
-    cdnURL: "https://cdn.anolet.com",
+    cdnURL: "https://cdn.canobal.com",
     clientURL,
     permissions: null,
     userLoaded: false,
